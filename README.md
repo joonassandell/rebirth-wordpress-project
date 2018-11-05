@@ -55,7 +55,8 @@ If you don't want to use Rebirth you can skip this step.
 ```
 // Install yeoman and the generator
 $ yarn global add yo
-$ yarn global add generator-rebirt
+$ yarn global add generator-rebirth
+
 // Create theme
 $ yo rebirth [theme-name] --project=wordpress
 ```
