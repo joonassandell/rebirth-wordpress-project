@@ -1,6 +1,6 @@
 # Rebirth — WordPress Development Environment
 
-This is a modern WordPress stack designed to work with [Rebirth](https://github.com/joonasy/rebirth) that helps you get started with the best development tools and project structure.
+This is a modern WordPress stack designed to work with [Rebirth](https://github.com/joonasy/rebirth)s that helps you get started with the best development tools and project structure.
 
 ## Features
 
@@ -32,24 +32,24 @@ After the installation is done jump to phase 3 in the next section.
 
 This development template assumes that you are using [Rebirth](https://github.com/joonasy/rebirth) to develop your theme. However it is not required and you may use any theme you like.
 
-**1.** Clone this git repository and create your project folder
+**1. Clone this git repository and create your project folder**
 
     $ git clone https://github.com/joonasy/rebirth-wordpress-dev.git my-project-dir-dev
 
-**2.** Replace all of the following variables in all the project files with _machine readable format_:
+**2. Replace all of the following variables in all the project files with _machine readable format_**
 
-* `{{name}}` — This is your project name (e.g. `my-project-dir-dev`; For claritys sake it's recommended to use same name as your project folders name, which should also be used for git urls).   
-* `{{human-name}}` — This is your project human readable name (e.g. `My Project`).
-* `{{theme-dir}}` — This will be your theme name/directory which will be generated later (e.g. `my-theme-dir`)
-* `{{author}}` — Author of this project (e.g. `joonasy`)
-* `{{production-url}}` — Website url of the project in which the app will be published (e.g. `https://project-name.com`) 
+* `{{name}}`: This is your project name (e.g. `my-project-dir-dev`; It's recommended to use same name as your project folders name which you created above. This should also be used for git urls).   
+* `{{human-name}}`: This is your project human readable name (e.g. `My Project`).
+* `{{theme-dir}}`: This will be your theme name/directory which will be generated later (e.g. `my-theme-dir`)
+* `{{author}}`: Author of this project (e.g. `joonasy`)
+* `{{production-url}}`: Website url of the project in which the app will be published (e.g. `https://project-name.com`) 
 * `{{wpml-user-id}}` WPML user id. (e.g. `=8365`, _Note that you need to add the `=` sign in front here and in the following variables_)
 * `{{wpml-key}}` WPML subscription key (e.g. `=gxNTN8dHlwZ...`)
 * `{{acf-key}}` ACF subscription key (e.g. `=9wZXJ8ZGF0...`)
 
-By default this template requires [WPML](http://wpml.org) and [ACF](https://www.advancedcustomfields.com) so you need to have those plugins purchased. ACF subscription key can be found from [advancedcustomfields.com/my-account](https://www.advancedcustomfields.com/my-account) and WPML user id and subscription key can be found from the download url in [wpml.org/account/downloads/?download=6088user_id=YOUR_USER_ID&subscription_key=YOUR_KEY](https://wpml.org/account/downloads/). _If you don't need these plugins remove them from the [web/composer.json](web/composer.json)_.
+By default this template requires [WPML](http://wpml.org) and [ACF](https://www.advancedcustomfields.com) so you need to have those plugins purchased. ACF subscription key can be found from [advancedcustomfields.com/my-account](https://www.advancedcustomfields.com/my-account) and WPML user id and subscription key can be found from the download url in [wpml.org/account/downloads/?user_id=YOUR_USER_ID&subscription_key=YOUR_KEY](https://wpml.org/account/downloads/). _If you don't need these plugins remove them from the [web/composer.json](web/composer.json)_.
 
-**3.** Install theme with Rebirth Yeoman generator
+**3. Install theme with Rebirth Yeoman generator**
 
 If you don't want to use Rebirth you can skip this step.
 
@@ -65,7 +65,7 @@ $ yarn global add generator-rebirth
 $ yo rebirth [theme-name] --project=wordpress
 ```
 
-**4.** Install all the dependencies and kickstart the project
+**4. Install all the dependencies and kickstart the project**
 
 Make sure docker is running as the following command will require it.
 
@@ -77,7 +77,7 @@ Crab a cup of :coffee: as the installation process may take a while. If you are 
 
 After the installation is done, navigate to [PROJECT.md](PROJECT.md) to learn about further installation process and available commands.
 
-**5.** Recommended actions
+**5. Recommended actions**
 
 1. Require your theme repository in [web/composer.json](web/composer.json) so it gets installed in further installation processes:
 
@@ -107,4 +107,6 @@ Happy developing!
 
 ## Nice to know
 
-By default `web/wp-content/themes` is ignored by git because we don't want this development repository to track theme related changes nor we want to use submodules. This is recommended practice since things may get messy if we have multiple themes in a single project. If for some reason you want to track these changes, add `!web/wp-content/themes` to `.gitignore`.
+## `web/wp-content/themes` is ignored
+
+By default `web/wp-content/themes` is ignored by git because we don't want this development repository to track theme related changes nor we want to use submodules. This is recommended practice since things may get messy if we have multiple themes in a single project. If for some reason you want to track these changes, remove `web/wp-content/themes/*` from `.gitignore`.
