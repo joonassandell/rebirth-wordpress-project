@@ -40,8 +40,8 @@ plan.local(['start'], (local) => {
 
   local.log('Installing dependencies...');
   local.exec(`
-    if [ -f "web/wp/wp-content/themes/{{ theme-name }}" ]  
-      cd {{ theme-name }} && yarn
+    if [ -f "web/wp/wp-content/themes/{{theme-name}}" ]  
+      cd {{theme-name}} && yarn
     fi
 
     if [ ! -f "web/.htaccess" ]
@@ -57,7 +57,7 @@ plan.local(['start'], (local) => {
     # Start Docker
     docker-compose up -d
 
-    docker run --rm --volumes-from={{ project-name }}-web --workdir=/var/www/html/ \
+    docker run --rm --volumes-from={{name}}-web --workdir=/var/www/html/ \
       composer/composer:alpine update
   `);
 });

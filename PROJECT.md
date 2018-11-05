@@ -1,6 +1,6 @@
-# {{ project-human-name }} - Development environment
+# {{human-name}} - Development environment
 
-> Docker development environment for `{{ project-name }}`. Started with [rebirth-wordpress-project](https://github.com/joonasy/rebirth-wordpress-project.git). 
+> Docker development environment for `{{name}}`. Started with [rebirth-wordpress-project](https://github.com/joonasy/rebirth-wordpress-project.git). 
 
 # Requirements
 
@@ -14,7 +14,7 @@
 
 **1. Clone this repository**
 
-        $ git clone git@bitbucket.org:{{ author }}/{{ project-name }}.git
+        $ git clone git@bitbucket.org:{{author}}/{{name}}.git
 
 **2. Prepare for installation**
 
@@ -40,7 +40,7 @@ Login to WordPress, activate plugins and theme if you kickstarted the project, o
 
 **5. Start theme development**
 
-Go to `web/wp-content/themes/{{ theme-name }}` to learn about the theme development and deployment. 
+Go to `web/wp-content/themes/{{theme-name}}` to learn about the theme development and deployment. 
 
 # Usage
 

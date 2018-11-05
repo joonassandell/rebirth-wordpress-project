@@ -58,7 +58,7 @@ regenerate-thumbnails:
 	docker-compose exec app bash -c "wp media regenerate --yes --allow-root"
 
 composer:
-	docker run --rm --volumes-from={{ project-name }}-web --workdir=/var/www/html/ composer/composer:alpine $(c)
+	docker run --rm --volumes-from={{name}}-web --workdir=/var/www/html/ composer/composer:alpine $(c)
 
 
 # ========================================

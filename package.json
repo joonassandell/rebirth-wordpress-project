@@ -1,8 +1,8 @@
 {
   "name": "{{name}}",
-  "author": "{{ author }}",
-  "description": "WordPress development environment for {{ project-human-name }}",
-  "homepage": "{{ production-url }}",
+  "author": "{{author}}",
+  "description": "WordPress development environment for {{human-name}}",
+  "homepage": "{{production-url}}",
   "main": "flightplan.js",
   "license": "MIT",
   "scripts": {

@@ -36,11 +36,11 @@ switch (getenv('WORDPRESS_ENV')) {
         define('DB_PASSWORD', '');
         define('DB_HOST', 'localhost');
 
-        define('WP_HOME', '{{ production-url }}');
-        define('WP_SITEURL', '{{ production-url }}/wp');
+        define('WP_HOME', '{{production-url}}');
+        define('WP_SITEURL', '{{production-url}}/wp');
 
         define('WP_CONTENT_DIR', dirname(__FILE__) . '/wp-content');
-        define('WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/wp-content');
+        define('WP_CONTENT_URL', 'https://' . $_SERVER['HTTP_HOST'] . '/wp-content');
         
         define('WP_DEBUG_DISPLAY', false);
         ini_set('display_errors', 0);
