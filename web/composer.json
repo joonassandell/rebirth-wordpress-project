@@ -1,0 +1,78 @@
+{
+  "name": "{{ author }}/{{ project-name }}",
+  "description": "WordPress development environment for {{ project-human-name }}",
+  "type": "project",
+  "license": "MIT",
+  "homepage": "{{ project-url }}",
+  "version": "1.0.0",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    }, {
+      "type": "composer",
+      "url": "https://packagist.org"
+    }, {
+      "type": "package",
+      "package": {
+        "name": "advanced-custom-fields/advanced-custom-fields-pro",
+        "version": "5.7.7",
+        "type": "wordpress-plugin",
+        "dist": {
+          "type": "zip",
+          "url": "https://connect.advancedcustomfields.com/index.php?p=pro&a=download&k={{ wpml-key }}"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "wpml/sitepress-multilingual-cms",
+        "version": "4.0.7",
+        "type": "wordpress-plugin",
+        "dist": {
+          "type": "zip",
+          "url":
+            "https://wpml.org/?download=6088&user_id={{ wpml-user-id }}&subscription_key={{ wpml-key }}"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "wpml/wpml-translation-management",
+        "version": "2.6.7",
+        "type": "wordpress-plugin",
+        "dist": {
+          "type": "zip",
+          "url":
+            "https://wpml.org/?download=6094&user_id={{ wpml-user-id }}&subscription_key={{ wpml-key }}"
+        }
+      }
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "johnpbloch/wordpress": "^4.9.8",
+    "wpackagist-plugin/w3-total-cache": "^0.9.7",
+    "wpackagist-plugin/contact-form-7": "^5.0.1",
+    "wpackagist-plugin/flamingo": "^1.6",
+    "wpackagist-plugin/duplicate-post": "^3.2.1",
+    "wpackagist-plugin/timber-library": "1.8.1",
+    "wpackagist-plugin/wordpress-seo": "^8.3",
+    "wpackagist-plugin/simple-history": "^2.21.1",
+    "wpackagist-plugin/members": "^2.1.0",
+    "wpackagist-plugin/redirection": "^3.2.1",
+    "wpackagist-plugin/ewww-image-optimizer": "^4.2.1",
+    "wpackagist-plugin/simple-custom-post-order": "^2.3.2",
+    "advanced-custom-fields/advanced-custom-fields-pro": "*",
+    "wpml/sitepress-multilingual-cms": "*",
+    "wpml/wpml-translation-management": "*"
+  },
+  "extra": {
+    "wordpress-install-dir": "wp",
+    "installer-paths": {
+      "wp-content/plugins/{$name}/": ["type:wordpress-plugin"]
+    }
+  }
+}

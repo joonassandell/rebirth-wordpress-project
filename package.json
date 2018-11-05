@@ -1,0 +1,27 @@
+{
+  "name": "{{ name }}",
+  "author": "{{ author }}",
+  "description": "WordPress development environment for {{ project-human-name }}",
+  "homepage": "{{ production-url }}",
+  "main": "flightplan.js",
+  "license": "MIT",
+  "scripts": {
+    "assets:pull": "fly assets-pull:production",
+    "db:backup": "fly db-backup:local",
+    "db:pull": "fly db-pull:production-db",
+    "db:replace": "fly db-replace:production-db",
+    "start": "fly start:local",
+    "production:assets:push": "fly assets-push:production --flightplan flightplan.remote.js",
+    "production:db:replace": "fly db-replace:production-db --flightplan flightplan.remote.js",
+    "production:start": "fly start:production --flightplan flightplan.remote.js",
+    "production:update": "fly update:production --flightplan flightplan.remote.js"
+  },
+  "devDependencies": {
+    "dotenv": "^4.0.0",
+    "flightplan": "^0.6.15",
+    "node-gyp": "^3.8.0"
+  },
+  "engines": {
+    "node": ">=9.10.0"
+  }
+}

@@ -1,0 +1,30 @@
+version: '3.1'
+
+services:
+  web:
+    container_name: {{ project-name }}-web
+    image: wordpress:php7.1-apache
+    command: bash -c "curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp && exec apache2-foreground"
+    depends_on:
+      - db
+    ports:
+      - 8000:80
+    volumes:
+      - ./web:/var/www/html/
+    environment:
+      WORDPRESS_ENV: development
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: root
+
+  db:
+    container_name: {{ project-name }}-mysql
+    image: mariadb
+    ports:
+      - 13307:3306
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./database:/database
