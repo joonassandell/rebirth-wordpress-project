@@ -18,7 +18,7 @@
 
 **2. Prepare for installation**
 
-1. Copy [`.env.example`](.env.example) to `.env` file and set your environment variables. Most of the vars should already be set by the creator of the project. Especially make sure that all the `PROD_*` vars are set (e.g `PROD_PASSWORD`). 
+1. Copy [`.env.example`](.env.example) to `.env` file and set your environment variables. Most of the vars should already be set by the creator of the project. Especially make sure that all the `PRODUCTION_*` vars are set (e.g `PRODUCTION_PASSWORD`). 
 
 2. Start docker
 
@@ -105,8 +105,8 @@ Install WordPress and plugins to the production server. This is most likely **re
 You may want to:
 
 * Deploy your theme first
-* Add production database creadentials temporarily in [`wp/wp-config.php`](wp/wp-config.php) so they can copied to the server (Do not commit!)
-* `$ make production-db-replace-clone`: Replace remote database with your local one. Make sure the database name matches with the remote in `.env` (`PROD_DB_NAME`).
+* Add production database credentials and [unique keys and salts](https://api.wordpress.org/secret-key/1.1/salt/) temporarily in [`wp/wp-config.php`](wp/wp-config.php) so they can copied to the server (Do not commit)
+* `$ make production-db-replace-clone`: Replace remote database with your local one. Make sure the database name matches with the remote in `.env` (`PRODUCTION_DB_NAME`).
 * `$ make production-assets-push` to sync your local materials to the server
 
 If you want to add new new server environments you need to modify [flightplan.remote.js](flightplan.remote.js), [flightplan.config.js](flightplan.config.js), [Makefile](Makefile), [package.json](package.json), [.env](.env) and [.env.example](.env.example) files. 

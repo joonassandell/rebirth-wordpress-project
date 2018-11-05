@@ -55,7 +55,7 @@ db-replace-clone:
 	yarn --silent db:replace
 
 regenerate-thumbnails:
-	docker-compose exec app bash -c "wp media regenerate --yes --allow-root"
+	docker-compose exec web bash -c "wp media regenerate --yes --allow-root"
 
 composer:
 	docker run --rm --volumes-from={{name}}-web --workdir=/var/www/html/ composer/composer:alpine $(c)

@@ -11,7 +11,7 @@
  */
 switch (getenv('WORDPRESS_ENV')) {
 	case "development": {
-		define('DB_NAME', 'wordpress');
+        define('DB_NAME', 'wordpress');
         define('DB_USER', 'root');
         define('DB_PASSWORD', 'root');
         define('DB_HOST', 'db');
@@ -26,8 +26,8 @@ switch (getenv('WORDPRESS_ENV')) {
         define('WP_DEBUG', true);
         define('FS_METHOD', 'direct');
         define('WP_DEV', true);
-
-		break;
+        
+        break;
 	}
 
 	default: {
@@ -44,8 +44,8 @@ switch (getenv('WORDPRESS_ENV')) {
         
         define('WP_DEBUG_DISPLAY', false);
         ini_set('display_errors', 0);
-
-		break;
+        
+        break;
 	}
 }
 
