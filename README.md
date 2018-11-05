@@ -18,10 +18,10 @@
 
 ## Quick start
 
-Install with [create-project](https://github.com/mafintosh/create-project). After the installation is done jump to phase 3 in the next section.
+Install with [create-project](https://github.com/mafintosh/create-project). Add your variables to the following one-liner. After the installation is done jump to phase 3 in the next section.
 
 ```
-$ npx create-project project-folder-dev --name=my-project --human-name="My Project" --theme-name=my-theme --author=joonasy --production-url=https://myproject.com --wpml-user-id= --wpml-key= --acf-key=
+$ npx create-project project-dir-dev --human-name="My Project" --theme-name=my-theme --author=joonasy --production-url=https://my-project.com --wpml-user-id="=8365..." --wpml-key="=gxNTN8dHlwZ..." --acf-key="=9wZXJ8ZGF0..."
 ```
 
 ## Getting started
@@ -30,18 +30,18 @@ This development template assumes that you are using [Rebirth](https://github.co
 
 **1.** Clone this git repository and create your project folder
 
-    $ git clone https://github.com/joonasy/rebirth-wordpress-project.git project-folder-dev
+    $ git clone https://github.com/joonasy/rebirth-wordpress-project.git project-dir-dev
 
 **2.** Replace all of the following variables in all the project files with _machine readable format_:
 
-* `{{name}}` — This is your project name (e.g. `project-folder-dev`; For clarity it's recommended to use same name as declared above to the folder name, which should also be used for git urls).   
+* `{{name}}` — This is your project name (e.g. `project-dir-dev`; For clarity it's recommended to use same name as declared above to the folder name, which should also be used for git urls).   
 * `{{human-name}}` — This is your project human readable name (e.g. `Project Name`).
-* `{{theme-name}}` — This will be your theme name which will be generated later e.g. `project-name-theme`.
-* `{{author}}` — Author of this project e.g. `joonasy`
-* `{{production-url}}` — Website url of the project in which the app will be published e.g. `https://project-name.com` 
-* `{{wpml-user-id}}` WPML user id e.g. `8365` 
-* `{{wpml-key}}` WPML subscription key `gxNTN8dHlwZ...`
-* `{{acf-key}}` ACF subscription key e.g. `9wZXJ8ZGF0...`
+* `{{theme-name}}` — This will be your theme name which will be generated later (e.g. `project-name-theme`)
+* `{{author}}` — Author of this project (e.g. `joonasy`)
+* `{{production-url}}` — Website url of the project in which the app will be published (e.g. `https://project-name.com`) 
+* `{{wpml-user-id}}` WPML user id. (e.g. `=8365`, _Note that you need to add the `=` sign in front_)
+* `{{wpml-key}}` WPML subscription key (e.g. `=gxNTN8dHlwZ...`)
+* `{{acf-key}}` ACF subscription key (e.g. `=9wZXJ8ZGF0...`)
 
 By default this template requires [WPML](http://wpml.org) and [ACF](https://www.advancedcustomfields.com) so you need to have those plugins purchased. ACF subscription key can be found from [advancedcustomfields.com/my-account](https://www.advancedcustomfields.com/my-account) and WPML user id and subscription key can be found from the download url in [https://wpml.org/account/downloads/?download=6088user_id=YOUR_USER_ID&subscription_key=YOUR_KEY](https://wpml.org/account/downloads/). _If you don't need these plugins remove them from the [web/composer.json](web/composer.json)_.
 

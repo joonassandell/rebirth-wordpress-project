@@ -20,7 +20,7 @@
         "type": "wordpress-plugin",
         "dist": {
           "type": "zip",
-          "url": "https://connect.advancedcustomfields.com/index.php?p=pro&a=download&k={{wpml-key}}"
+          "url": "https://connect.advancedcustomfields.com/index.php?p=pro&a=download&k{{wpml-key}}"
         }
       }
     },
@@ -33,7 +33,7 @@
         "dist": {
           "type": "zip",
           "url":
-            "https://wpml.org/?download=6088&user_id={{wpml-user-id}}&subscription_key={{wpml-key}}"
+            "https://wpml.org/?download=6088&user_id{{wpml-user-id}}&subscription_key{{wpml-key}}"
         }
       }
     },
@@ -46,7 +46,7 @@
         "dist": {
           "type": "zip",
           "url":
-            "https://wpml.org/?download=6094&user_id={{wpml-user-id}}&subscription_key={{wpml-key}}"
+            "https://wpml.org/?download=6094&user_id{{wpml-user-id}}&subscription_key{{wpml-key}}"
         }
       }
     }
