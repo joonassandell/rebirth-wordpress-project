@@ -1,5 +1,5 @@
 {
-  "name": "{{ name }}",
+  "name": "{{name}}",
   "author": "{{ author }}",
   "description": "WordPress development environment for {{ project-human-name }}",
   "homepage": "{{ production-url }}",
