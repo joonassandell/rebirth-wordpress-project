@@ -1,6 +1,6 @@
 # {{human-name}} - Development environment
 
-> Docker development environment for `{{name}}`. Started with [rebirth-wordpress-project](https://github.com/joonasy/rebirth-wordpress-project.git). 
+> Docker development environment for `{{name}}`. Started with [rebirth-wordpress-dev](https://github.com/joonasy/rebirth-wordpress-dev.git). 
 
 # Requirements
 
@@ -40,7 +40,7 @@ Login to WordPress, activate plugins and theme if you kickstarted the project, o
 
 **5. Start theme development**
 
-Go to `web/wp-content/themes/{{theme-name}}` to learn about the theme development and deployment. 
+Go to `web/wp-content/themes/{{theme-dir}}` to learn about the theme development and deployment. 
 
 # Usage
 
@@ -125,4 +125,4 @@ Push your local assets to the production server.
 
 ---
 
-You may learn more about the project structure in [Rebirth — WordPress Development Environment](https://github.com/joonasy/rebirth-wordpress-project)
+You may learn more about the project structure in [Rebirth — WordPress Development Environment](https://github.com/joonasy/rebirth-wordpress-dev)
