@@ -9,6 +9,7 @@ This is a modern WordPress stack designed to work with [Rebirth](https://github.
 * Better folder structure
 * Uses composer for installing plugins. Includes useful plugins out of the box.
 * Automatic WordPress installation to remote location
+* Scripts for deploying databases and assets to remote locations
 * Scripts for pulling assets and databases from remote locations
 
 ## Requirements
@@ -105,8 +106,12 @@ After the installation is done, navigate to [PROJECT.md](PROJECT.md) to learn ab
 
 Happy developing! 
 
-## Nice to know
+## Changelog
 
-## `web/wp-content/themes` is ignored
+See [CHANGELOG.md](/CHANGELOG.md)
+
+## Useful information
+
+### `web/wp-content/themes` is ignored
 
 By default `web/wp-content/themes` is ignored by git because we don't want this development repository to track theme related changes nor we want to use submodules. This is recommended practice since things may get messy if we have multiple themes in a single project. If for some reason you want to track these changes, remove `web/wp-content/themes/*` from `.gitignore`.
