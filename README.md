@@ -98,7 +98,7 @@ After the installation is done, navigate to [PROJECT.md](PROJECT.md) to learn ab
     - Rename `PROJECT.md` to `README.md`
     - `CHANGELOG.md`
     - `.git` folder
-4. Git init your fresh new project
+4. Git init your fresh new project and remember to init your theme as well
 
 Happy developing! 
 
