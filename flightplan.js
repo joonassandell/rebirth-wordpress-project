@@ -42,11 +42,6 @@ plan.local(['start'], (local) => {
 
   local.log('Installing dependencies...');
   local.exec(`
-    if [ -f "web/wp/wp-content/themes/{{theme-dir}}" ]  
-      then
-        cd {{theme-dir}} && yarn
-    fi
-
     if [ ! -f "web/.htaccess" ]
       then
         cp web/.htaccess.example web/.htaccess
@@ -57,11 +52,16 @@ plan.local(['start'], (local) => {
         cp web/wp-config.example.php web/wp-config.php
     fi
 
-    # Start Docker
     docker-compose up -d
 
-    docker run --rm --volumes-from={{name}}-web --workdir=/var/www/html/ \
-      composer/composer:alpine update
+    docker run --rm -v ${process.env.DEVELOPMENT_SSH_KEYS_PATH}:/root/.ssh \
+      --volumes-from={{name}}-web \
+      --workdir=/var/www/html/ composer/composer update
+    
+    if [ -f "web/wp/wp-content/themes/{{theme-dir}}" ]  
+      then
+        cd {{theme-dir}} && yarn
+    fi
   `);
 });
 

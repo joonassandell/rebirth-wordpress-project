@@ -9,10 +9,12 @@
     {
       "type": "composer",
       "url": "https://wpackagist.org"
-    }, {
+    }, 
+    {
       "type": "composer",
       "url": "https://packagist.org"
-    }, {
+    }, 
+    {
       "type": "package",
       "package": {
         "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -72,7 +74,8 @@
   "extra": {
     "wordpress-install-dir": "wp",
     "installer-paths": {
-      "wp-content/plugins/{$name}/": ["type:wordpress-plugin"]
+      "wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
+      "wp-content/themes/{$name}": ["type:wordpress-theme"]
     }
   }
 }

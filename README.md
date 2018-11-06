@@ -64,7 +64,8 @@ $ npx yo rebirth [theme-dir] --project=wordpress
 
 **4. Install all the dependencies and kickstart the project**
 
-Make sure docker is running as the following command will require it.
+1. Copy `.env.example` to `.env` and setup your environment variables
+2. Make sure docker is running as the following command will require it
 
 ```
 $ make start
@@ -81,13 +82,13 @@ After the installation is done, navigate to [PROJECT.md](PROJECT.md) to learn ab
 ```
 ...
 "repositories": [
-    {
+  {
     "type": "vcs",
     "url": "git@bitbucket.org:{{author}}/{{theme-dir}}.git"
-    }
+  }
 ],
 "require-dev": {
-    "{{author}}/{{theme-dir}}": "*"
+  "{{author}}/{{theme-dir}}": "*@dev"
 }
 ...
 ```
