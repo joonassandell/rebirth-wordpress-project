@@ -18,7 +18,7 @@ services:
       WORDPRESS_DB_PASSWORD: root
 
   db:
-    container_name: {{name}}-mysql
+    container_name: {{name}}-db
     image: mariadb
     ports:
       - 13307:3306
