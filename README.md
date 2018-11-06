@@ -1,6 +1,6 @@
 # Rebirth — WordPress Development Environment
 
-This is a modern WordPress stack designed to work with [Rebirth](https://github.com/joonasy/rebirth)s that helps you get started with the best development tools and project structure.
+This is a modern WordPress stack designed to work with [Rebirth](https://github.com/joonasy/rebirth) that helps you get started with the best development tools and project structure.
 
 ## Features
 
@@ -48,7 +48,7 @@ This development template assumes that you are using [Rebirth](https://github.co
 * `{{wpml-key}}` WPML subscription key (e.g. `=gxNTN8dHlwZ...`)
 * `{{acf-key}}` ACF subscription key (e.g. `=9wZXJ8ZGF0...`)
 
-By default this template requires [WPML](http://wpml.org) and [ACF](https://www.advancedcustomfields.com) so you need to have those plugins purchased. ACF subscription key can be found from [advancedcustomfields.com/my-account](https://www.advancedcustomfields.com/my-account) and WPML user id and subscription key can be found from the download url in [wpml.org/account/downloads/?user_id=YOUR_USER_ID&subscription_key=YOUR_KEY](https://wpml.org/account/downloads/). _If you don't need these plugins remove them from the [web/composer.json](web/composer.json)_.
+By default this template requires [WPML](http://wpml.org) and [ACF](https://www.advancedcustomfields.com) so you need to have those plugins purchased. ACF subscription key can be found from [advancedcustomfields.com/my-account](https://www.advancedcustomfields.com/my-account) and WPML user id and subscription key can be found from the download urls in [wpml.org/account/downloads/?user_id=YOUR_USER_ID&subscription_key=YOUR_KEY](https://wpml.org/account/downloads/). _If you don't need these plugins remove them from the [web/composer.json](web/composer.json)_.
 
 **3. Install theme with Rebirth Yeoman generator**
 
@@ -58,12 +58,7 @@ If you don't want to use Rebirth you can skip this step.
 2. Create your theme with [Rebirth Yeoman Generator](https://github.com/joonasy/generator-rebirth) and make sure the previously added {{theme-dir}} matches with the generated project name. 
 
 ```
-// Install yeoman and the generator
-$ yarn global add yo
-$ yarn global add generator-rebirth
-
-// Create theme
-$ yo rebirth [theme-name] --project=wordpress
+$ npx yo rebirth [theme-dir] --project=wordpress
 ```
 
 **4. Install all the dependencies and kickstart the project**
