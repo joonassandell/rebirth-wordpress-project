@@ -58,6 +58,7 @@ If you don't want to use Rebirth you can skip this step.
 2. Create your theme with [Rebirth Yeoman Generator](https://github.com/joonasy/generator-rebirth) and make sure the previously added {{theme-dir}} matches with the generated project name. 
 
 ```
+$ yarn global add generator-rebirth
 $ npx yo rebirth [theme-dir] --project=wordpress
 ```
 
