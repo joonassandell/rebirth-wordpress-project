@@ -14,7 +14,9 @@
 
 **1. Clone this repository**
 
-        $ git clone git@bitbucket.org:{{author}}/{{name}}.git
+```
+$ git clone git@bitbucket.org:{{author}}/{{name}}.git
+```
 
 **2. Prepare for installation**
 
@@ -26,11 +28,15 @@
 
 1. Clone production environment to your local development environment (Requires SSH access and production server credentials):
 
-        $ make start-clone
+```
+$ make start-clone
+```
 
 2. Or kickstart your project:
 
-        $ make start
+```
+$ make start
+```
 
 Crab a cup of :coffee: as the installation process may take a while. If you are not able to run these please refer to the [Makefile](Makefile) and run the commands manually.
 

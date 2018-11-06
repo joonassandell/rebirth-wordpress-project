@@ -134,8 +134,8 @@ plan.remote(['db-replace'], remote => {
       -e ' \
         create database ${dbName}; use ${dbName}; \
         source ${webRoot}tmp/database/local/wordpress-${date}.sql; \
-        set @DEVELOPMENT_URL="${process.env.DEV_URL}"; \
-        set @DEVELOPMENT_SITE_URL="${process.env.DEV_URL}/wp"; \
+        set @DEVELOPMENT_URL="${process.env.DEVELOPMENT_URL}"; \
+        set @DEVELOPMENT_SITE_URL="${process.env.DEVELOPMENT_URL}/wp"; \
         set @REMOTE_URL="${url}"; \
         set @REMOTE_SITE_URL="${url}/wp"; \
         source ${webRoot}migrate.remote.txt;'

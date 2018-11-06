@@ -2,6 +2,7 @@ require('dotenv').config();
 const plan = require('flightplan');
 const cfg = require('./flightplan.config');
 
+
 /* ======
  * Configuration
  * ====== */
@@ -29,6 +30,7 @@ plan.local(['start', 'assets-pull', 'db-pull', 'db-replace'], (local) => {
   dbUser = plan.runtime.options.dbUser;
   dbPw = plan.runtime.options.dbPw;
 });
+
 
 /* ======
  * Start & update
@@ -62,6 +64,7 @@ plan.local(['start'], (local) => {
   `);
 });
 
+
 /* ======
  * Pull assets
  * ====== */
@@ -75,6 +78,7 @@ plan.local(['assets-pull'], (local) => {
   );
 });
 
+
 /* ======
  * Backup database
  * ====== */
@@ -85,6 +89,7 @@ plan.local(['db-backup'], (local) => {
   local.exec(`docker-compose exec mysql bash -c 'mysqldump -uroot -proot \
       wordpress > /database/local/wordpress-${date}.sql'`);
 });
+
 
 /* ======
  * Pull database
@@ -116,6 +121,7 @@ plan.remote(['db-pull'], (remote) => {
   remote.exec(`rm ${webRoot}tmp/database/remote/${dbName}-${date}.sql`);
 });
 
+
 /* ======
  * Replace database
  * ====== */
@@ -138,8 +144,8 @@ plan.local(['db-replace'], (local) => {
           -e ' \
             create database wordpress; \
             use wordpress; source database/wordpress.sql; \
-            set @DEVELOPMENT_URL=\"${process.env.DEV_URL}\"; \
-            set @DEVELOPMENT_SITE_URL=\"${process.env.DEV_URL}/wp\"; \
+            set @DEVELOPMENT_URL=\"${process.env.DEVELOPMENT_URL}\"; \
+            set @DEVELOPMENT_SITE_URL=\"${process.env.DEVELOPMENT_URL}/wp\"; \
             set @REMOTE_URL=\"${url}\"; \
             set @REMOTE_SITE_URL=\"${url}/wp\"; \
             source database/migrate.txt;'"
