@@ -20,7 +20,7 @@
         "type": "wordpress-plugin",
         "dist": {
           "type": "zip",
-          "url": "https://connect.advancedcustomfields.com/index.php?p=pro&a=download&k{{wpml-key}}"
+          "url": "https://connect.advancedcustomfields.com/index.php?p=pro&a=download&k{{acf-key}}"
         }
       }
     },
