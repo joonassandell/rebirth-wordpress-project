@@ -43,7 +43,8 @@ plan.local(['start'], (local) => {
   local.log('Installing dependencies...');
   local.exec(`
     if [ -f "web/wp/wp-content/themes/{{theme-dir}}" ]  
-      cd {{theme-dir}} && yarn
+      then
+        cd {{theme-dir}} && yarn
     fi
 
     if [ ! -f "web/.htaccess" ]
