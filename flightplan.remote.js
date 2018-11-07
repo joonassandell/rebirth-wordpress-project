@@ -108,7 +108,7 @@ plan.remote(['start', 'update'], remote => {
 plan.local(['db-replace'], local => {
   local.log('Creating local database dump...');
   local.exec(`mkdir -p database/local`, { silent: true, failsafe: true });
-  local.exec(`docker-compose exec mysql bash -c "mysqldump -uroot -proot \
+  local.exec(`docker-compose exec db bash -c "mysqldump -uroot -proot \
     wordpress > database/local/wordpress-${date}.sql"`);
 
   local.log('Pushing local database dump to remote...');
