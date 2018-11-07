@@ -37,9 +37,6 @@ plan.local(['start', 'assets-pull', 'db-pull', 'db-replace'], (local) => {
  * ====== */
 
 plan.local(['start'], (local) => {
-  local.log('Updating submodules...');
-  local.exec(`git submodule update --rebase --remote`, { failsafe: true } );
-
   local.log('Installing dependencies...');
   local.exec(`
     if [ ! -f "web/.htaccess" ]
@@ -60,7 +57,7 @@ plan.local(['start'], (local) => {
     
     if [ -f "web/wp/wp-content/themes/{{theme-dir}}" ]  
       then
-        cd {{theme-dir}} && yarn
+        cd web/wp/wp-content/themes/{{theme-dir}} && yarn
     fi
   `);
 });
@@ -87,7 +84,7 @@ plan.local(['assets-pull'], (local) => {
 plan.local(['db-backup'], (local) => {
   local.log('Creating local backups...');
   local.exec(`mkdir -p database/local`, { silent: true, failsafe: true });
-  local.exec(`docker-compose exec mysql bash -c 'mysqldump -uroot -proot \
+  local.exec(`docker-compose exec db bash -c 'mysqldump -uroot -proot \
       wordpress > /database/local/wordpress-${date}.sql'`);
 });
 
@@ -132,7 +129,7 @@ plan.local(['db-replace'], (local) => {
 
   local.exec(
     String.raw`
-    docker-compose exec mysql bash -c "mysql -uroot -proot \
+    docker-compose exec db bash -c "mysql -uroot -proot \
       -e 'drop database wordpress;'"
   `,
     { failsafe: true },
@@ -141,7 +138,7 @@ plan.local(['db-replace'], (local) => {
   local.exec(String.raw`
     if [ -f "database/wordpress.sql" ]
       then
-        docker-compose exec mysql bash -c "mysql -uroot -proot \
+        docker-compose exec db bash -c "mysql -uroot -proot \
           -e ' \
             create database wordpress; \
             use wordpress; source database/wordpress.sql; \
