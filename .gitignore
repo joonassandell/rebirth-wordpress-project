@@ -30,6 +30,9 @@ docker-compose.override.yml
 # ======
 
 node_modules
+database/*
+!database/migrate.txt
+!database/migrate.remote.txt
 web/wp
 web/vendor
 web/.htaccess
