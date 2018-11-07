@@ -29,14 +29,14 @@ plan.local('start', local => {
 });
 
 plan.local(['start', 'update', 'assets-push', 'db-replace'], local => {
-  sshHost = plan.runtime.hosts[0].host
-  sshUser = plan.runtime.hosts[0].username
-  sshPort = plan.runtime.hosts[0].port
-  webRoot = plan.runtime.options.webRoot
-  url = plan.runtime.options.url
-  dbName = plan.runtime.options.dbName
-  dbUser = plan.runtime.options.dbUser
-  dbPw = plan.runtime.options.dbPw
+  sshHost = plan.runtime.hosts[0].host;
+  sshUser = plan.runtime.hosts[0].username;
+  sshPort = plan.runtime.hosts[0].port;
+  webRoot = plan.runtime.options.webRoot;
+  url = plan.runtime.options.url;
+  dbName = plan.runtime.options.dbName;
+  dbUser = plan.runtime.options.dbUser;
+  dbPw = plan.runtime.options.dbPw;
 });
 
 
@@ -67,7 +67,7 @@ plan.remote(['start', 'update'], remote => {
   remote.exec(`curl -sS https://getcomposer.org/installer | php && mv composer.phar ${webRoot}`);
 
   remote.log('Copying files...');
-  const deploymentPath = `${webRoot}tmp/wp-deployments/${tmpDir}`;
+  const deploymentPath = `${webRoot}tmp/wp-deployments/${tmpDir}/`;
 
   remote.exec(`cp ${deploymentPath}wp/composer.json ${webRoot}`);
 
@@ -119,7 +119,7 @@ plan.local(['db-replace'], local => {
 });
 
 plan.remote(['db-replace'], remote => {
-  remote.log('Backuping remote database...');
+  remote.log('Backing up remote database...');
   remote.exec(`mkdir -p ${webRoot}tmp/database/remote`, { failsafe: true });
   remote.exec(`cp ${webRoot}tmp/database/migrate.remote.txt ${webRoot}`);
   remote.exec(`mysqldump -u${dbUser} -p${dbPw} -f ${dbName} > \
@@ -141,6 +141,7 @@ plan.remote(['db-replace'], remote => {
         source ${webRoot}migrate.remote.txt;'
   `, { failsafe: true });
 
+  remote.log('Removing transferred material from remote...');
   remote.exec(`rm ${webRoot}migrate.remote.txt`, { silent: true, failsafe: true });
   remote.exec(`rm -r ${webRoot}tmp/database/local`, { silent: true, failsafe: true });
 });
