@@ -21,7 +21,7 @@ This is a modern WordPress stack designed to work with [Rebirth](https://github.
 
 ## Quick start
 
-Quickly install with [create-project](https://github.com/mafintosh/create-project). Add your variables to the following one-liner: 
+Quickly install with [create-project](https://github.com/mafintosh/create-project). Add your values to the following one-liner: 
 
 ```
 $ npx create-project my-project-dir-dev joonasy/rebirth-wordpress-dev --human-name="My Project" --theme-dir=my-theme-dir --author=joonasy --production-url=https://my-project.com --wpml-user-id="=8365..." --wpml-key="=gxNTN8dHlwZ..." --acf-key="=9wZXJ8ZGF0..."
@@ -41,7 +41,7 @@ This development template assumes that you are using [Rebirth](https://github.co
 
 * `{{name}}`: This is your project name (e.g. `my-project-dir-dev`; It's recommended to use same name as your project folders name which you created above. This should also be used for git urls).   
 * `{{human-name}}`: This is your project human readable name (e.g. `My Project`).
-* `{{theme-dir}}`: This will be your theme name/directory which will be generated later (e.g. `my-theme-dir`)
+* `{{theme-dir}}`: This will be your theme directory which will be generated later (e.g. `my-theme-dir`)
 * `{{author}}`: Author of this project (e.g. `joonasy`)
 * `{{production-url}}`: Website url of the project in which the app will be published (e.g. `https://project-name.com`) 
 * `{{wpml-user-id}}` WPML user id. (e.g. `=8365`, _Note that you need to add the `=` sign in front here and in the following variables_)

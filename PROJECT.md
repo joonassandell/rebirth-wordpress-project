@@ -66,7 +66,7 @@ Clone production environment to your local development environment. Builds, crea
 
 #### `$ make up`
 
-Use this to resume developing after installing the project. Starts Docker containers (your development environment).
+Starts Docker containers. Use this to resume developing after installing the project. 
 
 #### `$ make stop`
 
@@ -74,11 +74,11 @@ Stop Docker containers.
 
 #### `$ make update`
 
-Update dependencies (Git submodules, Composer, Npm).
+Update dependencies (Yarn, Composer).
 
 #### `$ make rebuild`
 
-Rebuild and reinstall containers, including your MySQL container (Note that you will lose your current data) and run `$ make start-sync`.
+Rebuilds and reinstall containers, including your MySQL container (Note that you will lose your current data).
 
 #### `$ make web`
 
@@ -96,9 +96,13 @@ Pull uploaded files from production environment (`uploads/`  folder etc.) to you
 
 Create and pull MySQL dump from the production environment to `database/remote` folder, backup current database to  `database/local` folder and place the pulled dump ready for importing/replacing (`database/wordpress.sql`). Make sure database server credentials are set in the `.env` file.
 
+#### `$ make db-replace`
+
+Backups current database and replaces it with `database/wordpress.sql` dump. 
+
 #### `$ make db-replace-clone`
 
-Runs `$ make db-pull` and replaces local database with `database/wordpress.sql` dump. Runs SQL commands from the `database/migrate.txt` file.  
+Shorcut for `$ make db-pull` & `$ make db-replace`.
 
 ## Remote commands
 
