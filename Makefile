@@ -7,7 +7,6 @@ start:
 	yarn --silent start
 
 start-clone:
-	docker-compose up -d
 	yarn
 	yarn --silent start
 	yarn --silent db:pull
@@ -26,7 +25,7 @@ update:
 rebuild:
 	docker-compose stop
 	docker-compose rm -f web
-	docker-compose rm -f mysql
+	docker-compose rm -f db
 	docker-compose up -d
 
 web:
