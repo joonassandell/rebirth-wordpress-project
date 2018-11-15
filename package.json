@@ -5,6 +5,7 @@
   "homepage": "{{production-url}}",
   "main": "flightplan.js",
   "license": "MIT",
+  "version": "1.0.0",
   "scripts": {
     "assets:pull": "fly assets-pull:production",
     "db:backup": "fly db-backup:local",

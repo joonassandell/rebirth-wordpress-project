@@ -38,19 +38,6 @@
             "https://wpml.org/?download=6088&user_id{{wpml-user-id}}&subscription_key{{wpml-key}}"
         }
       }
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "wpml/wpml-translation-management",
-        "version": "2.6.7",
-        "type": "wordpress-plugin",
-        "dist": {
-          "type": "zip",
-          "url":
-            "https://wpml.org/?download=6094&user_id{{wpml-user-id}}&subscription_key{{wpml-key}}"
-        }
-      }
     }
   ],
   "require": {
@@ -68,8 +55,7 @@
     "wpackagist-plugin/ewww-image-optimizer": "^4.2.1",
     "wpackagist-plugin/simple-custom-post-order": "^2.3.2",
     "advanced-custom-fields/advanced-custom-fields-pro": "*",
-    "wpml/sitepress-multilingual-cms": "*",
-    "wpml/wpml-translation-management": "*"
+    "wpml/sitepress-multilingual-cms": "*"
   },
   "extra": {
     "wordpress-install-dir": "wp",
