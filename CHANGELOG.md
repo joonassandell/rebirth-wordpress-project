@@ -4,8 +4,9 @@ All notable changes to this project will be documented in this file. The format 
 
 ## [0.0.2] - 2018-11-15
  
+* Install theme modules only if `node_modules` exists in themes folder
 * Remove WPML Translation Management
-* Add version to package.json
+* Add version to `package.json`
 
 ## [0.0.1] - 2018-11-05
 

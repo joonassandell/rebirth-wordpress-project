@@ -55,7 +55,7 @@ plan.local(['start'], (local) => {
       --volumes-from={{name}}-web \
       --workdir=/var/www/html/ composer/composer update
     
-    if [ -f "web/wp/wp-content/themes/{{theme-dir}}" ]  
+    if [ ! -f "web/wp/wp-content/themes/{{theme-dir}}/node_modules" ]  
       then
         cd web/wp/wp-content/themes/{{theme-dir}} && yarn
     fi
