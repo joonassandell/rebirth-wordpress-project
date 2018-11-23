@@ -12,10 +12,11 @@
 
 # Installation 
 
-**1. Clone this repository**
+**1. Clone this repository and the theme repository**
 
 ```
 $ git clone git@bitbucket.org:{{author}}/{{name}}.git
+$ git clone git@bitbucket.org:{{author}}/{{theme-dir}}.git web/wp-content/themes/{{theme-dir}}
 ```
 
 **2. Prepare for installation**

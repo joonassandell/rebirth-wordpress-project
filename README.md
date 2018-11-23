@@ -77,23 +77,7 @@ After the installation is done, navigate to [PROJECT.md](PROJECT.md) to learn ab
 
 **5. Recommended actions**
 
-1. Require your theme repository in [web/composer.json](web/composer.json) so it gets installed in further installation processes:
-
-```
-...
-"repositories": [
-  {
-    "type": "vcs",
-    "url": "git@bitbucket.org:{{author}}/{{theme-dir}}.git"
-  }
-],
-"require-dev": {
-  "{{author}}/{{theme-dir}}": "*@dev"
-}
-...
-```
-
-2. Make sure `PROJECT.md` contains correct information such as correct remote git links
+1. Make sure `PROJECT.md` contains correct information such as correct remote git links
 3. Delete the following files 
     - This `README.md` 
     - Rename `PROJECT.md` to `README.md`
@@ -107,8 +91,8 @@ Happy developing!
 
 See [CHANGELOG.md](/CHANGELOG.md)
 
-## Useful information
+## FAQ
 
-### `web/wp-content/themes` is ignored
+### Why is `web/wp-content/themes` is ignored?
 
 By default `web/wp-content/themes` is ignored by git because we don't want this development repository to track theme related changes nor we want to use submodules. This is recommended practice since things may get messy if we have multiple themes in a single project. If for some reason you want to track these changes, remove `web/wp-content/themes/*` from `.gitignore`.

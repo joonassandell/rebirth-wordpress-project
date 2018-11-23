@@ -54,8 +54,7 @@ plan.local(['start', 'update'], local => {
     'web/index.php',
     'web/wp-content/mu-plugins/register-theme-directory.php',
     'web/wp-config.php',
-    'web/composer.json',
-    'web/auth.json'
+    'web/composer.json'
   ]
 
   local.log('Transferring local files ready for remote installation...');
@@ -67,25 +66,27 @@ plan.remote(['start', 'update'], remote => {
   remote.exec(`curl -sS https://getcomposer.org/installer | php && mv composer.phar ${webRoot}`);
 
   remote.log('Copying files...');
-  const deploymentPath = `${webRoot}tmp/wp-deployments/${tmpDir}/`;
+  const deploymentPath = `${webRoot}tmp/wp-deployments/${tmpDir}/web/`;
 
-  remote.exec(`cp ${deploymentPath}wp/composer.json ${webRoot}`);
+  remote.exec(`cp ${deploymentPath}composer.json ${webRoot}`);
 
   if (plan.runtime.task === 'start') {
-    remote.exec(`cp ${deploymentPath}wp/.htaccess.example ${webRoot}.htaccess`);
-    remote.exec(`cp ${deploymentPath}wp/index.php ${webRoot}`);
+    remote.exec(`cp ${deploymentPath}.htaccess.example ${webRoot}.htaccess`);
+    remote.exec(`cp ${deploymentPath}index.php ${webRoot}`);
     remote.exec(`mkdir -p ${webRoot}wp-content/mu-plugins/`, { silent: true, failsafe: true });
-    remote.exec(`cp ${deploymentPath}wp/wp-content/mu-plugins/register-theme-directory.php \
+    remote.exec(`cp ${deploymentPath}wp-content/mu-plugins/register-theme-directory.php \
       ${webRoot}wp-content/mu-plugins/`);
-    remote.exec(`cp ${deploymentPath}wp/wp-config.php ${webRoot}`);
+    remote.exec(`cp ${deploymentPath}wp-config.php ${webRoot}`);
   }
 
   remote.log('Installing Composer dependencies...');
   remote.exec(`mkdir ${webRoot}vendor`, { failsafe: true });
-  remote.with(`cd ${webRoot}`, () => { remote.exec(`php composer.phar update --no-dev`)});
+  remote.with(`cd ${webRoot}`, () => { remote.exec(`php composer.phar update \
+    --prefer-dist --no-dev --optimize-autoloader --no-interaction`)});
 
   remote.log('Removing uploaded files...');
   remote.exec(`rm -r ${webRoot}composer.json`, { failsafe: true });
+  remote.exec(`rm -r ${webRoot}composer.lock`, { failsafe: true });
   remote.exec(`rm -r ${deploymentPath}`);
 });
 
@@ -97,7 +98,7 @@ plan.remote(['start', 'update'], remote => {
  plan.local(['assets-push'], local => {
   local.log('Deploying uploads folder...');
   local.exec(`rsync -avz -e "ssh -p ${sshPort}" \
-    wp/wp-content/uploads ${sshUser}@${sshHost}:${webRoot}wp-content`, { failsafe: true });
+    web/wp-content/uploads ${sshUser}@${sshHost}:${webRoot}wp-content`, { failsafe: true });
  });
 
 
