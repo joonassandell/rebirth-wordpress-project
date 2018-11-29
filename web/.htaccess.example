@@ -9,11 +9,16 @@ RewriteRule . /index.php [L]
 </IfModule>
 # END WordPress
 
-
 # ======
+# Basics
+# ======
+
+# Block access to directories without a default document
+<IfModule mod_autoindex.c>
+  Options -Indexes
+</IfModule>
+
 # Block WordPress xmlrpc.php requests
-# ======
-
 <files xmlrpc.php>
   order allow,deny
   deny from all
@@ -33,20 +38,29 @@ RewriteRule . /index.php [L]
 
 
 # ======
-# Redirect www.
+# Rewrites
 # ======
 
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  Options +FollowSymlinks
+
+  RewriteCond %{HTTPS} =on
+  RewriteRule ^ - [env=proto:https]
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^ - [env=proto:http]
+</IfModule>
+
+# Force https://
 # <IfModule mod_rewrite.c>
 #   RewriteEngine On
-#   # RewriteCond %{HTTP_HOST} !^www\. [NC]
-#   RewriteCond %{SERVER_ADDR} !=127.0.0.1
-#   RewriteCond %{SERVER_ADDR} !=::1
-#   RewriteRule ^ %{ENV:PROTO}://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+#   RewriteCond %{HTTPS} !=on
+#   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 # </IfModule>
 
-
-# ======
-# Security 
-# ======
-
-Options -Indexes
+# Rewrite www.example.com → example.com
+# <IfModule mod_rewrite.c>
+#   RewriteEngine On
+#   RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+#   RewriteRule ^ %{ENV:PROTO}://%1%{REQUEST_URI} [R=301,L]
+# </IfModule>
