@@ -65,7 +65,7 @@ $ npx yo rebirth [theme-dir] --project=wordpress
 **4. Install all the dependencies and kickstart the project**
 
 1. Copy `.env.example` to `.env` and setup your environment variables
-2. Make sure docker is running as the following command will require it
+2. Make sure docker is running and no conflicting containers are stopped as the following command will require it
 
 ```
 $ make start
@@ -78,12 +78,12 @@ After the installation is done, navigate to [PROJECT.md](PROJECT.md) to learn ab
 **5. Recommended actions**
 
 1. Make sure `PROJECT.md` contains correct information such as correct remote git links
-3. Delete the following files 
+2. Delete the following files 
     - This `README.md` 
     - Rename `PROJECT.md` to `README.md`
     - `CHANGELOG.md`
     - `.git` folder
-4. Git init your fresh new project and remember to init your theme as well
+3. Git init your fresh new project and remember to init your theme as well
 
 Happy developing! 
 
@@ -91,8 +91,12 @@ Happy developing!
 
 See [CHANGELOG.md](/CHANGELOG.md)
 
-## FAQ
+## Notes
 
-### Why is `web/wp-content/themes` is ignored?
+### About plugins
+
+* If you're using caching or optimization plugins such as [Autoptimize](https://wordpress.org/plugins/autoptimize/) or [W3 Total Cache](https://wordpress.org/plugins/w3-total-cache/) you should disable locally because they might create issues with CORS, BrowserSync etc. Most of the time caching isn't necessary while developing anyways.
+
+### Why is `web/wp-content/themes` ignored?
 
 By default `web/wp-content/themes` is ignored by git because we don't want this development repository to track theme related changes nor we want to use submodules. This is recommended practice since things may get messy if we have multiple themes in a single project. If for some reason you want to track these changes, remove `web/wp-content/themes/*` from `.gitignore`.

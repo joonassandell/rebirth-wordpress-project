@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file. The format 
 * Remove WPML Translation Management
 * Add version to `package.json`
 * Ignore uploads/ folder
-* Add better method for working with theme
+* Add better method for working with the theme. Use git instead of composer.
 * Better remote composer installation
 
 ## [0.0.1] - 2018-11-05
