@@ -16,7 +16,7 @@
 
 ```
 $ git clone git@bitbucket.org:{{author}}/{{name}}.git
-$ git clone git@bitbucket.org:{{author}}/{{theme-dir}}.git web/wp-content/themes/{{theme-dir}}
+$ git clone git@bitbucket.org:{{author}}/{{theme-dir}}.git {{name}}/web/wp-content/themes/{{theme-dir}}
 ```
 
 **2. Prepare for installation**
