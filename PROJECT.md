@@ -1,6 +1,6 @@
 # {{human-name}} - Development environment
 
-> Docker development environment for `{{name}}`. Started with [rebirth-wordpress-dev](https://github.com/joonasy/rebirth-wordpress-dev.git). 
+> Docker development environment for {{human-name}}. Started with [rebirth-wordpress-dev](https://github.com/joonasy/rebirth-wordpress-dev.git). 
 
 # Requirements
 
