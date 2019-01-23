@@ -52,14 +52,14 @@ By default this template requires [WPML](http://wpml.org) and [ACF](https://www.
 
 **3. Install theme with Rebirth Yeoman generator**
 
-If you don't want to use Rebirth you can skip this step.
+If you don't want to use Rebirth you can skip this step and create your theme in some other way.
 
 1. Navigate to `web/wp-content/themes/`
-2. Create your theme with [Rebirth Yeoman Generator](https://github.com/joonasy/generator-rebirth) and make sure the previously added {{theme-dir}} matches with the generated project name. 
+2. Create your theme with [Rebirth Yeoman Generator](https://github.com/joonasy/generator-rebirth)
 
 ```
 $ yarn global add generator-rebirth
-$ npx yo rebirth [theme-dir] --project=wordpress
+$ npx yo rebirth {{theme-dir}} --project=wordpress
 ```
 
 **4. Install all the dependencies and kickstart the project**
