@@ -11,13 +11,13 @@
  */
 switch (getenv('WORDPRESS_ENV')) {
 	case "development": {
-        define('DB_NAME', 'wordpress');
-        define('DB_USER', 'root');
-        define('DB_PASSWORD', 'root');
+        define('DB_NAME', getenv('WORDPRESS_DB_NAME'));
+        define('DB_USER', getenv('WORDPRESS_DB_USER'));
+        define('DB_PASSWORD', getenv('WORDPRESS_DB_PASSWORD'));
         define('DB_HOST', 'db');
 
-        define('WP_HOME', 'http://127.0.0.1:8000');
-        define('WP_SITEURL', 'http://127.0.0.1:8000/wp');
+        define('WP_HOME', getenv('DEVELOPMENT_URL'));
+        define('WP_SITEURL', getenv('DEVELOPMENT_URL') . '/wp');
 
         define('WP_CONTENT_DIR', dirname( __FILE__ ) . '/wp-content');
         define('WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/wp-content');
