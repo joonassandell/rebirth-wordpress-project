@@ -80,7 +80,7 @@ plan.local(['db-backup'], (local) => {
   local.log('Creating local backups...');
   local.exec(`mkdir -p database/local`, { silent: true, failsafe: true });
   local.exec(`docker-compose exec db bash -c 'mysqldump -uroot -proot \
-      wordpress > /database/local/wordpress-${date}.sql'`);
+      wordpress > /database/local/wordpress-${date}.sql'`, { failsafe: true });
 });
 
 
@@ -124,8 +124,11 @@ plan.local(['db-replace'], (local) => {
 
   local.exec(
     String.raw`
-    docker-compose exec db bash -c "mysql -uroot -proot \
-      -e 'drop database wordpress;'"
+      if [ -f "database/wordpress.sql" ]
+        then
+          docker-compose exec db bash -c "mysql -uroot -proot \
+            -e 'drop database wordpress;'"
+      fi
   `,
     { failsafe: true },
   );
