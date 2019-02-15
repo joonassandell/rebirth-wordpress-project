@@ -136,4 +136,4 @@ Push your local assets to the production server.
 
 ---
 
-You may learn more about the project structure in [Rebirth — WordPress Development Environment](https://github.com/joonasy/rebirth-wordpress-dev)
+You may learn more about the project and issues in [Rebirth — WordPress Development Environment](https://github.com/joonasy/rebirth-wordpress-dev)
