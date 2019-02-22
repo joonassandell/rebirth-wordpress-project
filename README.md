@@ -101,7 +101,11 @@ See [CHANGELOG.md](/CHANGELOG.md)
 
 By default `web/wp-content/themes` is ignored by git because we don't want this development repository to track theme related changes nor we want to use submodules. This is recommended practice since things may get messy if we have multiple themes in a single project. If for some reason you want to track these changes, remove `web/wp-content/themes/*` from `.gitignore`.
 
-### I cannot clone a private bitbucket repository w/ composer (e.g. `$ make update`)
+### Why using `wordpress:php*-apache` docker image if installing WordPress w/ composer?
+
+Because the official image includes all the basics WordPress requires. Image could very well be `php:*-apache` etc. as well.
+
+### I cannot clone a private bitbucket repository w/ composer
 
 This could be an issue with [OSX users](https://github.com/docker/for-mac/issues/410). The easiest way to solve this is to use bitbuckets "App Password" [solution](https://stackoverflow.com/questions/23391839/clone-private-git-repo-with-dockerfile):
 
@@ -110,3 +114,31 @@ This could be an issue with [OSX users](https://github.com/docker/for-mac/issues
 3. In `composer.json` replace your private repository url to include your credentials `https://username:app_password@bitbucket.org/author/repository.git`
 
 **Do not commit the above changes** just use it temporarily to get the repository. 
+
+### How to setup a [multisite network](https://codex.wordpress.org/Before_You_Create_A_Network)
+
+This starter doesn't yet support multisite but here are some gotchas.  
+
+Quick Setup. Add to `wp-config.php`:
+
+```
+/**
+ * Setup multisite
+ */
+define('WP_ALLOW_MULTISITE', true);
+define('MULTISITE', true);
+define('SUBDOMAIN_INSTALL', false);
+define('DOMAIN_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '127.0.0.1:8000' : 'productionsite.com');
+define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/');
+define('SITE_ID_CURRENT_SITE', 1);
+define('BLOG_ID_CURRENT_SITE', 1);
+```
+
+Replacing databases doesn't work out of the box if you have different domains and you are replacing databases. You need to verify following:
+    
+- `domain` and `path` in `wp_blogs` table
+- `domain` and `path`  in `wp_site` table
+
+
+
+
