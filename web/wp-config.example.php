@@ -1,7 +1,7 @@
 <?php
-/* ========================================
+/* =======================================
  * The base configuration for WordPress
- * ========================================
+ * =======================================
  *
  * https://github.com/WordPress/WordPress/blob/master/wp-config-sample.php
  */
