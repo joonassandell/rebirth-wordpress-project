@@ -81,8 +81,8 @@ plan.remote(['start', 'update'], remote => {
 
   remote.log('Installing Composer dependencies...');
   remote.exec(`mkdir ${webRoot}vendor`, { failsafe: true });
-  remote.with(`cd ${webRoot}`, () => { remote.exec(`php composer.phar update \
-    --prefer-dist --no-dev --optimize-autoloader --no-interaction`)});
+  remote.with(`cd ${webRoot}`, () => { remote.exec(`php composer.phar clearcache && \
+    php composer.phar update --prefer-dist --no-dev --optimize-autoloader --no-interaction`)});
 
   remote.log('Removing uploaded files...');
   remote.exec(`rm -r ${webRoot}composer.json`, { failsafe: true });

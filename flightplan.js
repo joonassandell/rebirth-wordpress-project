@@ -53,7 +53,11 @@ plan.local(['start'], (local) => {
 
     docker run --rm -v ${process.env.DEVELOPMENT_SSH_KEYS_PATH}:/root/.ssh \
       --volumes-from={{name}}-web \
-      --workdir=/var/www/html/ composer/composer update
+      --workdir=/var/www/html/ composer/composer clearcache
+
+    docker run --rm -v ${process.env.DEVELOPMENT_SSH_KEYS_PATH}:/root/.ssh \
+    --volumes-from={{name}}-web \
+    --workdir=/var/www/html/ composer/composer update
   `);
 });
 
