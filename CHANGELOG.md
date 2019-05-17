@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.0.3] - 2019-11-17
+
+* Clear composer caches always
+* Update docker PHP version 7.1 -> 7.3
+* Update plugin versions
+
 ## [0.0.2] - 2018-11-15
  
 * Remove theme related installations to prevent errors
