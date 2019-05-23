@@ -28,10 +28,10 @@ rebuild:
 	docker-compose rm -f db
 	docker-compose up -d
 
-web:
+web-bash:
 	docker-compose exec web bash
 
-db:
+db-bash:
 	docker-compose exec db bash
 
 assets-pull:

@@ -81,11 +81,11 @@ Update dependencies (Yarn, Composer).
 
 Rebuilds and reinstall containers, including your MySQL container (Note that you will lose your current data).
 
-#### `$ make web`
+#### `$ make web-bash`
 
 Connect to WordPress (`web`) container.
 
-#### `$ make db`
+#### `$ make db-bash`
 
 Connect to MySQL (`db`) container.
 
