@@ -56,6 +56,14 @@ db-replace-clone:
 regenerate-thumbnails:
 	docker-compose exec web bash -c "wp media regenerate --yes --allow-root"
 
+replace-special-characters: 
+	docker-compose exec web bash -c "wp search-replace 'Ã„' 'Ä' --allow-root && \
+	  wp search-replace 'Ã¤' 'ä' --allow-root && \
+	  wp search-replace 'â€' '”' --allow-root && \
+	  wp search-replace 'â€“' '–' --allow-root && \
+	  wp search-replace 'â€”' '—' --allow-root && \
+		wp search-replace 'Ã¶' 'ö' --allow-root"
+
 composer:
 	docker run --rm --volumes-from={{name}}-web --workdir=/var/www/html/ composer/composer:alpine $(c)
 

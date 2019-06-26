@@ -105,6 +105,14 @@ Backups current database and replaces it with `database/wordpress.sql` dump.
 
 Shorcut for `$ make db-pull` & `$ make db-replace`.
 
+#### `$ make replace-special-characters`
+
+Replace common invalid characters in database with WP-CLI (`Ã¤` -> `ä` etc.).
+
+#### `$ make regenerate-thumbnails`
+
+Regenerate WordPress thumbnails with WP-CLI.
+
 ## Remote commands
 
 **:warning: Be extremely careful with the remote commands or you may break the server configuration! You need SSH access for the remote commands.** Make sure all the production server credentials are set in the `.env` file and [config.js](config.js) has the correct urls set in `opts`. 
