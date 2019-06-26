@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.0.4x] - 2019-06-26
+
+* Add WPMS support
+* Use [WP-CLI](https://wp-cli.org)
+* Remove protocol example from PRODUCTION_URL
+* `PRODUCTION_URL` -> `PRODUCTION_DOMAIN`
+* Add PRODUCTION_WP_HOME in case WordPress home is located in subfolder
+* Update plugins & add useful default plugins
+
 ## [0.0.3] - 2019-11-17
 
 * Clear composer caches always
