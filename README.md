@@ -117,6 +117,8 @@ This could be an issue with [OSX users](https://github.com/docker/for-mac/issues
 
 ### How to setup a [multisite network](https://wordpress.org/support/article/before-you-create-a-network/)
 
+Following instructions setup WPMS to use blogs in subfolders.
+
 1. Read [Before You Create A Network](https://wordpress.org/support/article/before-you-create-a-network/)
 2. Add the following lines to `wp-config.php:~91` and make sure the're set correctly:
 
@@ -169,4 +171,5 @@ RewriteRule . index.php [L]
     - Change `define('ABSPATH', dirname( __FILE__ ) . '/wp/');` to `define('ABSPATH', dirname( __FILE__ ) . '/myhome/wp/');`
     - If using WPMS change `define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/');` to `define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/myhome/');`
 2. I .env add your home dir to `PRODUCTION_WP_HOME` (e.g. `PRODUCTION_WP_HOME=/myhome`) so that replacing databases works correctly
+3. In .htaccess make sure rewritebase is `RewriteBase /my-home` (not needed in WPMS)
 
