@@ -86,18 +86,6 @@ define('NONCE_SALT',       'put your unique phrase here');
 $table_prefix = 'wp_';
 
 /**
- * Setup multisite
- */
-// define('WP_ALLOW_MULTISITE', true);
-// define('MULTISITE', true);
-// define('SUBDOMAIN_INSTALL', false);
-// define('DOMAIN_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? getenv('DEVELOPMENT_URL') : '{{production-domain}}');
-// define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/');
-// define('SITE_ID_CURRENT_SITE', 1);
-// define('BLOG_ID_CURRENT_SITE', 1);
-
-
-/**
  * If we're behind a proxy server and using HTTPS, we need to alert Wordpress of that fact
  * see also http://codex.wordpress.org/Administration_Over_SSL#Using_a_Reverse_Proxy
  */

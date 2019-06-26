@@ -115,11 +115,10 @@ This could be an issue with [OSX users](https://github.com/docker/for-mac/issues
 
 **Do not commit the above changes** just use it temporarily to get the repository. 
 
-### How to setup a [multisite network](https://codex.wordpress.org/Before_You_Create_A_Network)
+### How to setup a [multisite network](https://wordpress.org/support/article/before-you-create-a-network/)
 
-This starter doesn't yet support multisite but here are some gotchas.  
-
-Quick Setup. Add to `wp-config.php`:
+1. Read [Before You Create A Network](https://wordpress.org/support/article/before-you-create-a-network/)
+2. Add the following lines to `wp-config.php:~91` and make sure the're set correctly:
 
 ```
 /**
@@ -128,17 +127,46 @@ Quick Setup. Add to `wp-config.php`:
 define('WP_ALLOW_MULTISITE', true);
 define('MULTISITE', true);
 define('SUBDOMAIN_INSTALL', false);
-define('DOMAIN_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '127.0.0.1:8000' : 'productionsite.com');
+define('DOMAIN_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? getenv('DEVELOPMENT_URL') : '{{production-domain}}');
 define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/');
 define('SITE_ID_CURRENT_SITE', 1);
 define('BLOG_ID_CURRENT_SITE', 1);
 ```
 
-Replacing databases doesn't work out of the box if you have different domains and you are replacing databases. You need to verify following:
-    
-- `domain` and `path` in `wp_blogs` table
-- `domain` and `path`  in `wp_site` table
+3. Add/replace the following to your `.htaccess`:
 
+```
+# ======
+# WordPress
+# ======
 
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
 
+# add a trailing slash to /wp-admin
+RewriteRule ^([_0-9a-zA-Z-]+/)?wp-admin$ $1wp-admin/ [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+RewriteRule ^([_0-9a-zA-Z-]+/)?(wp-(content|admin|includes).*) wp/$2 [L]
+RewriteRule ^([_0-9a-zA-Z-]+/)?(.*\.php)$ wp/$2 [L]
+RewriteRule . index.php [L]
+</IfModule>
+# END WordPress
+```
+
+4. Change `DEVELOPMENT_URL=127.0.0.1:8000` to `127.0.0.1`. E.g. make sure you _don't_ have port in in the dev url.
+
+### In production my WordPress home is located in a subdir (e.g. `https://{{production-domain}}/myhome`), how to make it work?
+
+1. In wp-config.php
+    - Change `define('WP_SITEURL', 'https://{{production-domain}}/wp');` to `define('WP_SITEURL', 'https://{{production-domain}}/myhome/wp');`
+    - Change `define('WP_CONTENT_URL', 'https://' . $_SERVER['HTTP_HOST'] . '/wp-content');` to `define('WP_CONTENT_URL', 'https://' . $_SERVER['HTTP_HOST'] . '/myhome/wp-content');`
+    - Change `define('ABSPATH', dirname( __FILE__ ) . '/wp/');` to `define('ABSPATH', dirname( __FILE__ ) . '/myhome/wp/');`
+    - If using WPMS change `define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/');` to `define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/myhome/');`
+2. I .env add your home dir to `PRODUCTION_WP_HOME` (e.g. `PRODUCTION_WP_HOME=/myhome`) so that replacing databases works correctly
 
