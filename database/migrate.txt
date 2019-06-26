@@ -1,7 +1,0 @@
-UPDATE wp_options SET option_value = replace(option_value, @REMOTE_URL, @DEVELOPMENT_URL) WHERE option_name = 'home';
-UPDATE wp_options SET option_value = replace(option_value, @REMOTE_SITE_URL, @DEVELOPMENT_SITE_URL) WHERE option_name = 'siteurl';
-UPDATE wp_posts SET post_content = replace(post_content, @REMOTE_URL, @DEVELOPMENT_URL);
-UPDATE wp_posts SET post_excerpt = replace(post_excerpt, @REMOTE_URL, @DEVELOPMENT_URL);
-UPDATE wp_posts SET guid = replace(guid, @REMOTE_URL, @DEVELOPMENT_URL);
-UPDATE wp_links SET link_url = replace(link_url, @REMOTE_URL, @DEVELOPMENT_URL);
-UPDATE wp_postmeta SET meta_value = replace(meta_value, @REMOTE_URL, @DEVELOPMENT_URL);
