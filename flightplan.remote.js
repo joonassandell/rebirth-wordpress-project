@@ -16,7 +16,7 @@ plan.target('production-db', cfg.productionDB, cfg.productionDB.opts);
 /**
  * Setup folders etc. ready for files
  */
-let sshUser, sshPort, sshHost, webRoot, url, dbName, dbUser, dbPw;
+let sshUser, sshPort, sshHost, webRoot, domain, wpHome, dbName, dbUser, dbPw;
 const date = new Date().getTime();
 const tmpDir = `wp-update-${date}`;
 
@@ -33,7 +33,8 @@ plan.local(['start', 'update', 'assets-push', 'db-replace'], local => {
   sshUser = plan.runtime.hosts[0].username;
   sshPort = plan.runtime.hosts[0].port;
   webRoot = plan.runtime.options.webRoot;
-  url = plan.runtime.options.url;
+  wpHome = plan.runtime.options.wpHome;
+  domain = plan.runtime.options.domain;
   dbName = plan.runtime.options.dbName;
   dbUser = plan.runtime.options.dbUser;
   dbPw = plan.runtime.options.dbPw;
@@ -45,7 +46,7 @@ plan.local(['start', 'update', 'assets-push', 'db-replace'], local => {
  * ====== */
 
 plan.remote(['start', 'update'], remote => {
-  remote.exec(`mkdir -p ${webRoot}tmp/wp-deployments`, { silent: true, failsafe: true });
+  remote.exec(`mkdir -p ${webRoot}/tmp/wp-deployments`, { silent: true, failsafe: true });
 });
 
 plan.local(['start', 'update'], local => {
@@ -58,36 +59,36 @@ plan.local(['start', 'update'], local => {
   ]
 
   local.log('Transferring local files ready for remote installation...');
-  local.transfer(filesToCopy, `${webRoot}tmp/wp-deployments/${tmpDir}/`, { failsafe: true });
+  local.transfer(filesToCopy, `${webRoot}/tmp/wp-deployments/${tmpDir}/`, { failsafe: true });
 });
 
 plan.remote(['start', 'update'], remote => {
   remote.log('Installing Composer...');
-  remote.exec(`curl -sS https://getcomposer.org/installer | php && mv composer.phar ${webRoot}`);
+  remote.exec(`curl -sS https://getcomposer.org/installer | php && mv composer.phar ${webRoot}/`);
 
   remote.log('Copying files...');
-  const deploymentPath = `${webRoot}tmp/wp-deployments/${tmpDir}/web/`;
+  const deploymentPath = `${webRoot}/tmp/wp-deployments/${tmpDir}/web`;
 
-  remote.exec(`cp ${deploymentPath}composer.json ${webRoot}`);
+  remote.exec(`cp ${deploymentPath}/composer.json ${webRoot}/`);
 
   if (plan.runtime.task === 'start') {
-    remote.exec(`cp ${deploymentPath}.htaccess.example ${webRoot}.htaccess`);
-    remote.exec(`cp ${deploymentPath}index.php ${webRoot}`);
-    remote.exec(`mkdir -p ${webRoot}wp-content/mu-plugins/`, { silent: true, failsafe: true });
-    remote.exec(`cp ${deploymentPath}wp-content/mu-plugins/register-theme-directory.php \
-      ${webRoot}wp-content/mu-plugins/`);
-    remote.exec(`cp ${deploymentPath}wp-config.php ${webRoot}`);
+    remote.exec(`cp ${deploymentPath}/.htaccess.example ${webRoot}/.htaccess`);
+    remote.exec(`cp ${deploymentPath}/index.php ${webRoot}/`);
+    remote.exec(`mkdir -p ${webRoot}/wp-content/mu-plugins/`, { silent: true, failsafe: true });
+    remote.exec(`cp ${deploymentPath}/wp-content/mu-plugins/register-theme-directory.php \
+      ${webRoot}/wp-content/mu-plugins/`);
+    remote.exec(`cp ${deploymentPath}/wp-config.php ${webRoot}/`);
   }
 
   remote.log('Installing Composer dependencies...');
-  remote.exec(`mkdir ${webRoot}vendor`, { failsafe: true });
-  remote.with(`cd ${webRoot}`, () => { remote.exec(`php composer.phar clearcache && \
+  remote.exec(`mkdir ${webRoot}/vendor`, { failsafe: true });
+  remote.with(`cd ${webRoot}/`, () => { remote.exec(`php composer.phar clearcache && \
     php composer.phar update --prefer-dist --no-dev --optimize-autoloader --no-interaction`)});
 
   remote.log('Removing uploaded files...');
-  remote.exec(`rm -r ${webRoot}composer.json`, { failsafe: true });
-  remote.exec(`rm -r ${webRoot}composer.lock`, { failsafe: true });
-  remote.exec(`rm -r ${deploymentPath}`);
+  remote.exec(`rm -r ${webRoot}/composer.json`, { failsafe: true });
+  remote.exec(`rm -r ${webRoot}/composer.lock`, { failsafe: true });
+  remote.exec(`rm -r ${deploymentPath}/`);
 });
 
 
@@ -98,7 +99,7 @@ plan.remote(['start', 'update'], remote => {
  plan.local(['assets-push'], local => {
   local.log('Deploying uploads folder...');
   local.exec(`rsync -avz -e "ssh -p ${sshPort}" \
-    web/wp-content/uploads ${sshUser}@${sshHost}:${webRoot}wp-content`, { failsafe: true });
+    web/wp-content/uploads ${sshUser}@${sshHost}:${webRoot}/wp-content`, { failsafe: true });
  });
 
 
@@ -114,35 +115,37 @@ plan.local(['db-replace'], local => {
 
   local.log('Pushing local database dump to remote...');
   local.transfer([
-    `database/migrate.remote.txt`,
     `database/local/wordpress-${date}.sql`
-  ], `${webRoot}tmp`);
+  ], `${webRoot}/tmp`);
 });
 
 plan.remote(['db-replace'], remote => {
   remote.log('Backing up remote database...');
-  remote.exec(`mkdir -p ${webRoot}tmp/database/remote`, { failsafe: true });
-  remote.exec(`cp ${webRoot}tmp/database/migrate.remote.txt ${webRoot}`);
+  remote.exec(`mkdir -p ${webRoot}/tmp/database/remote`, { failsafe: true });
   remote.exec(`mysqldump -u${dbUser} -p${dbPw} -f ${dbName} > \
-    ${webRoot}tmp/database/remote/wordpress-${date}.sql;`);
+    ${webRoot}/tmp/database/remote/wordpress-${date}.sql;`);
 
   remote.log('Dropping remote database...');
   remote.exec(`mysql -u${dbUser} -p${dbPw} -e 'drop database ${dbName};'`, { failsafe: true });
 
-  remote.log('Replacing remote database...');
+  remote.log('Installing WP-CLI & replacing strings in database...');
   remote.exec(`
-    mysql -u${dbUser} -p${dbPw} \
-      -e ' \
-        create database ${dbName}; use ${dbName}; \
-        source ${webRoot}tmp/database/local/wordpress-${date}.sql; \
-        set @DEVELOPMENT_URL="${process.env.DEVELOPMENT_URL}"; \
-        set @DEVELOPMENT_SITE_URL="${process.env.DEVELOPMENT_URL}/wp"; \
-        set @REMOTE_URL="${url}"; \
-        set @REMOTE_SITE_URL="${url}/wp"; \
-        source ${webRoot}migrate.remote.txt;'
+    if [ ! -f ${webRoot}/wp-cli.phar ]; then
+      curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar &&
+      mv wp-cli.phar ${webRoot}
+    fi
+
+    if $(cd ${webRoot} && php wp-cli.phar --url=${domain} core is-installed --network); 
+      then
+        cd ${webRoot} 
+        php wp-cli.phar search-replace --url=${process.env.DEVELOPMENT_DOMAIN} '${process.env.DEVELOPMENT_DOMAIN}' '${domain}${wpHome}' --network --skip-columns=guid --skip-tables=wp_users,wp_blogs,wp_site
+        php wp-cli.phar search-replace --url=${process.env.DEVELOPMENT_DOMAIN} '${process.env.DEVELOPMENT_DOMAIN}' '${domain}' wp_blogs wp_site --network
+      else
+        cd ${webRoot}
+        wp-cli.phar search-replace '${process.env.DEVELOPMENT_DOMAIN}' '${domain}${wpHome}' --skip-columns=guid --skip-tables=wp_users
+    fi
   `, { failsafe: true });
 
   remote.log('Removing transferred material from remote...');
-  remote.exec(`rm ${webRoot}migrate.remote.txt`, { silent: true, failsafe: true });
-  remote.exec(`rm -r ${webRoot}tmp/database/local`, { silent: true, failsafe: true });
+  remote.exec(`rm -r ${webRoot}/tmp/database/local`, { silent: true, failsafe: true });
 });

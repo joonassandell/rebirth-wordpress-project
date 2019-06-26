@@ -21,7 +21,8 @@ const config = {
     readyTimeout: 999999,
     opts: {
       webRoot: process.env.PRODUCTION_DB_WEBROOT,
-      url: process.env.PRODUCTION_URL,
+      domain: process.env.PRODUCTION_DOMAIN,
+      wpHome: process.env.PRODUCTION_WP_HOME,
       dbName: process.env.PRODUCTION_DB_NAME,
       dbUser: process.env.PRODUCTION_DB_USER,
       dbPw: process.env.PRODUCTION_DB_PASSWORD
