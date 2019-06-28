@@ -22,7 +22,7 @@
         "type": "wordpress-plugin",
         "dist": {
           "type": "zip",
-          "url": "https://connect.advancedcustomfields.com/index.php?p=pro&a=download&k{{acf-key}}t=5.7.13"
+          "url": "https://connect.advancedcustomfields.com/index.php?p=pro&a=download&k{{acf-key}}&t=5.7.13"
         }
       }
     },
