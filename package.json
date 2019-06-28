@@ -2,7 +2,7 @@
   "name": "{{name}}",
   "author": "{{author}}",
   "description": "WordPress development environment for {{human-name}}",
-  "homepage": "{{production-domain}}",
+  "homepage": "https://{{production-domain}}",
   "main": "flightplan.js",
   "license": "MIT",
   "version": "1.0.0",

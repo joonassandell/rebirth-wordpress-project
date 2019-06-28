@@ -3,7 +3,7 @@
   "description": "WordPress development environment for {{human-name}}",
   "type": "project",
   "license": "MIT",
-  "homepage": "{{production-domain}}",
+  "homepage": "https://{{production-domain}}",
   "version": "1.0.0",
   "repositories": [
     {

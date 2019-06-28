@@ -163,7 +163,7 @@ RewriteRule . index.php [L]
 
 4. Change `DEVELOPMENT_URL=127.0.0.1:8000` to `127.0.0.1`. E.g. make sure you _don't_ have port in in the dev url.
 
-### In production my WordPress home is located in a subdir (e.g. `https://{{production-domain}}/myhome`), how to make it work?
+### In production my WordPress home is located in a subdir (e.g. https://{{production-domain}}/myhome). How to make it work?
 
 1. In wp-config.php
     - Change `define('WP_SITEURL', 'https://{{production-domain}}/wp');` to `define('WP_SITEURL', 'https://{{production-domain}}/myhome/wp');`
