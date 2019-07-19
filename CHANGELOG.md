@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file. The format 
 - Add PRODUCTION_WP_HOME in case WordPress home is located in subfolder
 - Update plugins & add useful default plugins
 - Add prettier
+- Display errors in file (wp-content/)
 
 ## [0.0.3] - 2019-17-11
 
