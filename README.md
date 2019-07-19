@@ -129,7 +129,7 @@ Following instructions setup WPMS to use blogs in sub folders.
 define('WP_ALLOW_MULTISITE', true);
 define('MULTISITE', true);
 define('SUBDOMAIN_INSTALL', false);
-define('DOMAIN_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? getenv('DEVELOPMENT_URL') : '{{production-domain}}');
+define('DOMAIN_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? getenv('DEVELOPMENT_DOMAIN') : '{{production-domain}}');
 define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/');
 define('SITE_ID_CURRENT_SITE', 1);
 define('BLOG_ID_CURRENT_SITE', 1);
@@ -161,7 +161,7 @@ RewriteRule . index.php [L]
 # END WordPress
 ```
 
-4. Change `DEVELOPMENT_URL=127.0.0.1:8000` to `DEVELOPMENT_URL=127.0.0.1`. E.g. make sure you [_don't_ have port in the dev url](https://wordpress.org/support/article/before-you-create-a-network/#restrictions).
+4. Change `DEVELOPMENT_DOMAIN=127.0.0.1:8000` to `DEVELOPMENT_DOMAIN=127.0.0.1`. E.g. make sure you [_don't_ have port in the dev url](https://wordpress.org/support/article/before-you-create-a-network/#restrictions).
 
 ### In production my WordPress home is located in a subdir (e.g. https://{{production-domain}}/myhome). How to make it work?
 

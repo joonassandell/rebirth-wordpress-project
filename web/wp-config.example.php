@@ -16,8 +16,8 @@ switch (getenv('WORDPRESS_ENV')) {
         define('DB_PASSWORD', getenv('WORDPRESS_DB_PASSWORD'));
         define('DB_HOST', 'db');
 
-        define('WP_HOME', 'http://' . getenv('DEVELOPMENT_URL'));
-        define('WP_SITEURL', 'http://' . getenv('DEVELOPMENT_URL') . '/wp');
+        define('WP_HOME', 'http://' . getenv('DEVELOPMENT_DOMAIN'));
+        define('WP_SITEURL', 'http://' . getenv('DEVELOPMENT_DOMAIN') . '/wp');
 
         define('WP_CONTENT_DIR', dirname( __FILE__ ) . '/wp-content');
         define('WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/wp-content');
