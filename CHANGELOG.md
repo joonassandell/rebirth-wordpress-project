@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file. The format 
 - Use [WP-CLI](https://wp-cli.org)
 - Remove protocol example from PRODUCTION_URL
 - `PRODUCTION_URL` -> `PRODUCTION_DOMAIN`
+- `DEVELOPMENT_URL` -> `DEVELOPMENT_DOMAIN`
 - Add PRODUCTION_WP_HOME in case WordPress home is located in subfolder
 - Update plugins & add useful default plugins
 - Add prettier
