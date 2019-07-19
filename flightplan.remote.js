@@ -123,10 +123,18 @@ plan.remote(['db-replace'], remote => {
   remote.log('Backing up remote database...');
   remote.exec(`mkdir -p ${webRoot}/tmp/database/remote`, { failsafe: true });
   remote.exec(`mysqldump -u${dbUser} -p${dbPw} -f ${dbName} > \
-    ${webRoot}/tmp/database/remote/wordpress-${date}.sql;`);
+    ${webRoot}/tmp/database/remote/wordpress-${date}.sql;`, { failsafe: true });
 
   remote.log('Dropping remote database...');
   remote.exec(`mysql -u${dbUser} -p${dbPw} -e 'drop database ${dbName};'`, { failsafe: true });
+
+  remote.log('Replacing remote database...');
+  remote.exec(`
+    mysql -u${dbUser} -p${dbPw} \
+      -e ' \
+        create database ${dbName}; use ${dbName}; \
+        source ${webRoot}/tmp/database/local/wordpress-${date}.sql;'
+  `, { failsafe: true });
 
   remote.log('Installing WP-CLI & replacing strings in database...');
   remote.exec(`
