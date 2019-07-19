@@ -150,7 +150,7 @@ plan.remote(['db-replace'], remote => {
         php wp-cli.phar search-replace --url=${process.env.DEVELOPMENT_DOMAIN} '${process.env.DEVELOPMENT_DOMAIN}' '${domain}' wp_blogs wp_site --network
       else
         cd ${webRoot}
-        wp-cli.phar search-replace '${process.env.DEVELOPMENT_DOMAIN}' '${domain}${wpHome}' --skip-columns=guid --skip-tables=wp_users
+        php wp-cli.phar search-replace '${process.env.DEVELOPMENT_DOMAIN}' '${domain}${wpHome}' --skip-columns=guid --skip-tables=wp_users
     fi
   `, { failsafe: true });
 
