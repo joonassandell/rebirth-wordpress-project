@@ -170,5 +170,5 @@ RewriteRule . index.php [L]
    - Change `define('WP_CONTENT_URL', 'https://' . $_SERVER['HTTP_HOST'] . '/wp-content');` to `define('WP_CONTENT_URL', 'https://' . $_SERVER['HTTP_HOST'] . '/myhome/wp-content');`
    - Change `define('ABSPATH', dirname( __FILE__ ) . '/wp/');` to `define('ABSPATH', dirname( __FILE__ ) . '/myhome/wp/');`
    - If using WPMS change `define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/');` to `define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/myhome/');`
-2. I .env add your home dir to `PRODUCTION_WP_HOME` (e.g. `PRODUCTION_WP_HOME=/myhome`) so that replacing databases works correctly
+2. In .env add your home dir to `PRODUCTION_WP_HOME` (e.g. `PRODUCTION_WP_HOME=/myhome`) so that replacing databases works correctly
 3. In .htaccess make sure rewritebase is `RewriteBase /my-home` (not needed in WPMS)
