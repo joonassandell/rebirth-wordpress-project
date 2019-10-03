@@ -187,8 +187,4 @@ If you cloned the project:
    - Change `define('ABSPATH', dirname( __FILE__ ) . '/wp/');` to `define('ABSPATH', dirname( __FILE__ ) . '/myhome/wp/');`
    - If using WPMS change `define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/');` to `define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/myhome/');`
 2. In .env add your home dir to `PRODUCTION_WP_HOME` (e.g. `PRODUCTION_WP_HOME=/myhome`) so that replacing databases works correctly
-<<<<<<< HEAD
 3. In .htaccess make sure rewritebase is `RewriteBase /myhome` (not needed in WPMS)
-=======
-3. In .htaccess make sure rewritebase is `RewriteBase /my-home` (not needed in WPMS)
->>>>>>> c594b79f6a3a6913448d6a495c6efa5f20c86f58
