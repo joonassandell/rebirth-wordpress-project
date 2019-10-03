@@ -16,8 +16,8 @@ switch (getenv('WORDPRESS_ENV')) {
         define('DB_PASSWORD', getenv('WORDPRESS_DB_PASSWORD'));
         define('DB_HOST', 'db');
 
-        define('WP_HOME', 'http://' . getenv('DEVELOPMENT_DOMAIN'));
-        define('WP_SITEURL', 'http://' . getenv('DEVELOPMENT_DOMAIN') . '/wp');
+        define('WP_HOME', getenv('DEVELOPMENT_URL'));
+        define('WP_SITEURL', getenv('DEVELOPMENT_URL') . '/wp');
 
         define('WP_CONTENT_DIR', dirname( __FILE__ ) . '/wp-content');
         define('WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/wp-content');
@@ -25,7 +25,6 @@ switch (getenv('WORDPRESS_ENV')) {
         define('SAVEQUERIES', true);
         define('WP_DEBUG', true);
         define('FS_METHOD', 'direct');
-        define('WP_DEV', true);
         
         break;
 	}
@@ -62,6 +61,17 @@ define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
 
 /**
+ * WP Rocket credentials
+ */
+if (!defined('WP_ROCKET_KEY')) {
+	define('WP_ROCKET_KEY', '{{wp-rocket-key}}');
+}
+
+if (!defined('WP_ROCKET_EMAIL')) {
+	define('WP_ROCKET_EMAIL', '{{wp-rocket-email}}');
+}
+
+/**
  * Authentication Unique Keys and Salts.
  *
  * Change these to different unique phrases!
@@ -86,6 +96,18 @@ define('NONCE_SALT',       'put your unique phrase here');
  * a unique prefix. Only numbers, letters, and underscores please!
  */
 $table_prefix = 'wp_';
+
+/**
+ * Setup multisite
+ */
+// define('WP_ALLOW_MULTISITE', true);
+// define('MULTISITE', true);
+// define('SUBDOMAIN_INSTALL', false);
+// define('DOMAIN_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? getenv('DEVELOPMENT_URL') : '{{production-domain}}');
+// define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/');
+// define('SITE_ID_CURRENT_SITE', 1);
+// define('BLOG_ID_CURRENT_SITE', 1);
+
 
 /**
  * If we're behind a proxy server and using HTTPS, we need to alert Wordpress of that fact

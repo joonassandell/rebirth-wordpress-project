@@ -4,10 +4,12 @@
 
 start:
 	yarn
+	cd web/wp-content/themes/{{theme-dir}} && yarn
 	yarn --silent start
 
 start-clone:
 	yarn
+	cd web/wp-content/themes/{{theme-dir}} && yarn
 	yarn --silent start
 	yarn --silent db:pull
 	yarn --silent assets:pull
@@ -26,7 +28,7 @@ rebuild:
 	docker-compose stop
 	docker-compose rm -f web
 	docker-compose rm -f db
-	docker-compose up -d
+	make start
 
 web-bash:
 	docker-compose exec web bash

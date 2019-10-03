@@ -24,7 +24,7 @@ This is a modern WordPress stack designed to work with [Rebirth](https://github.
 Quickly install with [create-project](https://github.com/mafintosh/create-project). Add your values to the following one-liner:
 
 ```
-$ npx create-project my-project-dir-dev joonasy/rebirth-wordpress-dev --human-name="My Project" --theme-dir=my-theme-dir --author=joonasy --production-domain=my-project.com --wpml-user-id="=8365..." --wpml-key="=gxNTN8dHlwZ..." --acf-key="=9wZXJ8ZGF0..."
+$ npx create-project my-project-dir-dev joonasy/rebirth-wordpress-dev --human-name="My Project" --theme-dir=my-theme-dir --author=joonasy --production-domain=my-project.com --wpml-user-id="=8365..." --wpml-key="=..." --acf-key="=..." --wp-rocket-key="..." --wp-rocket-email="..."
 ```
 
 After the installation is done jump to phase 3 in the next section.
@@ -120,7 +120,7 @@ This could be an issue with [OSX users](https://github.com/docker/for-mac/issues
 Following instructions setup WPMS to use blogs in sub folders.
 
 1. Read [Before You Create A Network](https://wordpress.org/support/article/before-you-create-a-network/)
-2. Add the following lines to `wp-config.php:~91` and make sure they're set correctly:
+2. Add/uncomment the following lines to `wp-config.php:~103` and make sure they're set correctly:
 
 ```
 /**
@@ -129,13 +129,15 @@ Following instructions setup WPMS to use blogs in sub folders.
 define('WP_ALLOW_MULTISITE', true);
 define('MULTISITE', true);
 define('SUBDOMAIN_INSTALL', false);
-define('DOMAIN_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? getenv('DEVELOPMENT_DOMAIN') : '{{production-domain}}');
+define('DOMAIN_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? getenv('DEVELOPMENT_URL') : '{{production-domain}}');
 define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/');
 define('SITE_ID_CURRENT_SITE', 1);
 define('BLOG_ID_CURRENT_SITE', 1);
 ```
 
-3. Add/replace the following to your `.htaccess`:
+Also, copy the lines to `wp-config.example.php:~103` and **comment the last 5 (five) lines** to prevent errors if another developer has started the project without cloning.
+
+3. Add/uncomment the following in `.htaccess` & `.htaccess.example`:
 
 ```
 # ======
@@ -161,7 +163,21 @@ RewriteRule . index.php [L]
 # END WordPress
 ```
 
-4. Change `DEVELOPMENT_DOMAIN=127.0.0.1:8000` to `DEVELOPMENT_DOMAIN=127.0.0.1`. E.g. make sure you [_don't_ have port in the dev url](https://wordpress.org/support/article/before-you-create-a-network/#restrictions).
+4. In the projects README, replace the line `Login to WordPress, activate plugins ... works properly.` with the following:
+
+```
+If you kickstarted the project:
+
+1. Login to WordPress, activate plugins and themes
+2. [Create A Network](https://wordpress.org/support/article/create-a-network). Multisite setup is already ready to be commented out in `web/wp-config.php:~92` & `web/.htaccess:~55`
+
+If you cloned the project:
+
+1. Uncomment all the lines in `web/wp-config.php:~92` to allow wpms functionality
+2. Login to WordPress with the production credentials
+```
+
+5. Change `DEVELOPMENT_URL=127.0.0.1:8000` to `DEVELOPMENT_URL=127.0.0.1`. E.g. make sure you [_don't_ have port in the dev url](https://wordpress.org/support/article/before-you-create-a-network/#restrictions).
 
 ### In production my WordPress home is located in a subdir (e.g. https://{{production-domain}}/myhome). How to make it work?
 
@@ -170,5 +186,5 @@ RewriteRule . index.php [L]
    - Change `define('WP_CONTENT_URL', 'https://' . $_SERVER['HTTP_HOST'] . '/wp-content');` to `define('WP_CONTENT_URL', 'https://' . $_SERVER['HTTP_HOST'] . '/myhome/wp-content');`
    - Change `define('ABSPATH', dirname( __FILE__ ) . '/wp/');` to `define('ABSPATH', dirname( __FILE__ ) . '/myhome/wp/');`
    - If using WPMS change `define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/');` to `define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/myhome/');`
-2. I .env add your home dir to `PRODUCTION_WP_HOME` (e.g. `PRODUCTION_WP_HOME=/myhome`) so that replacing databases works correctly
-3. In .htaccess make sure rewritebase is `RewriteBase /my-home` (not needed in WPMS)
+2. In .env add your home dir to `PRODUCTION_WP_HOME` (e.g. `PRODUCTION_WP_HOME=/myhome`) so that replacing databases works correctly
+3. In .htaccess make sure rewritebase is `RewriteBase /myhome` (not needed in WPMS)

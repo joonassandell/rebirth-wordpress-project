@@ -16,9 +16,10 @@ plan.target('production-db', cfg.productionDB, cfg.productionDB.opts);
 /**
  * Setup folders etc. ready for files
  */
-let sshUser, sshPort, sshHost, webRoot, domain, wpHome, dbName, dbUser, dbPw;
+let sshUser, sshPort, sshHost, webRoot, url, domain, wpHome, dbName, dbUser, dbPw;
 const date = new Date().getTime();
-const tmpDir = `wp-update-${date}`;
+const devDomain = process.env.DEVELOPMENT_URL.replace(/(^\w+:|^)\/\//, '');
+const tmpDir = `wp-update-${date}`
 
 plan.local('start', local => {
   const input = local.prompt('Are you sure you want to continue with the process? [y/n]');
@@ -34,7 +35,8 @@ plan.local(['start', 'update', 'assets-push', 'db-replace'], local => {
   sshPort = plan.runtime.hosts[0].port;
   webRoot = plan.runtime.options.webRoot;
   wpHome = plan.runtime.options.wpHome;
-  domain = plan.runtime.options.domain;
+  url = plan.runtime.options.url;
+  domain = url ? url.replace(/(^\w+:|^)\/\//, '') : '';
   dbName = plan.runtime.options.dbName;
   dbUser = plan.runtime.options.dbUser;
   dbPw = plan.runtime.options.dbPw;
@@ -143,14 +145,15 @@ plan.remote(['db-replace'], remote => {
       mv wp-cli.phar ${webRoot}
     fi
 
-    if $(cd ${webRoot} && php wp-cli.phar --url=${domain} core is-installed --network); 
+    if $(cd ${webRoot} && php wp-cli.phar --url=${url} core is-installed --network); 
       then
         cd ${webRoot} 
-        php wp-cli.phar search-replace --url=${process.env.DEVELOPMENT_DOMAIN} '${process.env.DEVELOPMENT_DOMAIN}' '${domain}${wpHome}' --network --skip-columns=guid --skip-tables=wp_users,wp_blogs,wp_site
-        php wp-cli.phar search-replace --url=${process.env.DEVELOPMENT_DOMAIN} '${process.env.DEVELOPMENT_DOMAIN}' '${domain}' wp_blogs wp_site --network
+        php wp-cli.phar search-replace --url=${process.env.DEVELOPMENT_URL} '${process.env.DEVELOPMENT_URL}' '${url}${wpHome}' --network --skip-columns=guid --skip-tables=wp_users,wp_blogs,wp_site
+        php wp-cli.phar search-replace '${devDomain}' '${domain}' wp_blogs wp_site --network
+        php wp-cli.phar search-replace '^\/' '\/${wpHome}\/' wp_blogs --regex --network
       else
         cd ${webRoot}
-        php wp-cli.phar search-replace '${process.env.DEVELOPMENT_DOMAIN}' '${domain}${wpHome}' --skip-columns=guid --skip-tables=wp_users
+        php wp-cli.phar search-replace '${process.env.DEVELOPMENT_URL}' '${url}${wpHome}' --skip-columns=guid --skip-tables=wp_users
     fi
   `, { failsafe: true });
 

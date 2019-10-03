@@ -17,15 +17,17 @@ plan.target('production-db', cfg.productionDB, cfg.productionDB.opts);
 /**
  * Setup folders, prompts etc. ready for install
  */
-let sshUser, sshPort, sshHost, webRoot, domain, wpHome, dbName, dbUser, dbPw;
-let date = `${new Date().getTime()}`;
+let sshUser, sshPort, sshHost, webRoot, url, domain, wpHome, dbName, dbUser, dbPw;
+const date = `${new Date().getTime()}`;
+const devDomain = process.env.DEVELOPMENT_URL.replace(/(^\w+:|^)\/\//, '');
 
 plan.local(['start', 'assets-pull', 'db-pull', 'db-replace'], (local) => {
   sshHost = plan.runtime.hosts[0].host;
   sshUser = plan.runtime.hosts[0].username;
   sshPort = plan.runtime.hosts[0].port;
   webRoot = plan.runtime.options.webRoot;
-  domain = plan.runtime.options.domain;
+  url = plan.runtime.options.url;
+  domain = url ? url.replace(/(^\w+:|^)\/\//, '') : '';
   wpHome = plan.runtime.options.wpHome;
   dbName = plan.runtime.options.dbName;
   dbUser = plan.runtime.options.dbUser;
@@ -38,7 +40,7 @@ plan.local(['start', 'assets-pull', 'db-pull', 'db-replace'], (local) => {
  * ====== */
 
 plan.local(['start'], (local) => {
-  local.log('Installing dependencies...');
+  local.log('Preparing files and installing dependencies...');
   local.exec(`
     if [ ! -f web/.htaccess ]
       then
@@ -50,15 +52,28 @@ plan.local(['start'], (local) => {
         cp web/wp-config.example.php web/wp-config.php
     fi
 
+    if [ ! -f web/wp-content/themes/{{theme-dir}}/.env ]; then
+      cp web/wp-content/themes/{{theme-dir}}/.env.example \
+      web/wp-content/themes/{{theme-dir}}/.env
+    fi
+
     docker-compose up -d
 
-    docker run --rm -v ${process.env.DEVELOPMENT_SSH_KEYS_PATH}:/root/.ssh \
+    if [ -f web/wp-content/themes/{{theme-dir}}/composer.json ]; then
+      docker run --rm -v ${process.env.DEVELOPMENT_SSH_KEYS_PATH}:/root/.ssh \
       --volumes-from={{name}}-web \
-      --workdir=/var/www/html/ composer/composer clearcache
+      --workdir=/var/www/html/wp-content/themes/{{theme-dir}} composer/composer update
+    fi
 
     docker run --rm -v ${process.env.DEVELOPMENT_SSH_KEYS_PATH}:/root/.ssh \
     --volumes-from={{name}}-web \
     --workdir=/var/www/html/ composer/composer update
+
+    if [ -f web/wp-content/plugins/wp-rocket/composer.json ]; then
+      docker run --rm -v ${process.env.DEVELOPMENT_SSH_KEYS_PATH}:/root/.ssh \
+      --volumes-from={{name}}-web \
+      --workdir=/var/www/html/wp-content/plugins/wp-rocket composer/composer update --no-dev
+    fi
   `);
 });
 
@@ -151,12 +166,13 @@ plan.local(['db-replace'], (local) => {
   local.log('Replacing strings in database...');
   local.exec(String.raw`
     docker-compose exec web bash -c " \
-      if \$(wp --url=${domain} core is-installed --network --allow-root);
+      if \$(wp --url=${url} core is-installed --network --allow-root);
         then
-          wp search-replace --url=${domain} '${domain}${wpHome}' '${process.env.DEVELOPMENT_DOMAIN}' --network --allow-root --skip-columns=guid --skip-tables=wp_users,wp_blogs,wp_site
-          wp search-replace --url=${domain} '${domain}' '${process.env.DEVELOPMENT_DOMAIN}' wp_blogs wp_site --allow-root --network
+          wp search-replace --url='${url}${wpHome}' '${url}${wpHome}' '${process.env.DEVELOPMENT_URL}' --network --allow-root --skip-columns=guid --recurse-objects --skip-tables=wp_users,wp_blogs,wp_site
+          wp search-replace '${domain}' '${devDomain}' wp_blogs wp_site --allow-root --network
+          wp search-replace '${wpHome}' '' wp_blogs --allow-root --network
         else
-          wp search-replace '${domain}${wpHome}' '${process.env.DEVELOPMENT_DOMAIN}' --skip-columns=guid --allow-root --skip-tables=wp_users
+          wp search-replace '${url}${wpHome}' '${process.env.DEVELOPMENT_URL}' --skip-columns=guid --skip-tables=wp_users
       fi
     "
   `, { failsafe: true });

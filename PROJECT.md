@@ -8,7 +8,7 @@
 - [docker-compose](https://github.com/docker/compose)
 - [Node.js](http://nodejs.org/)
 - [Yarn](https://yarnpkg.com)
-- SSH access (RSA Key Pair) and [rsync](https://linux.die.net/man/1/rsync) (Optional but required for syncing assets and databases)
+- SSH access (RSA Key Pair) and [rsync](https://linux.die.net/man/1/rsync) for syncing assets, repositories and databases
 
 # Installation
 
@@ -23,23 +23,25 @@ $ git clone git@bitbucket.org:{{author}}/{{theme-dir}}.git {{name}}/web/wp-conte
 
 1. Copy [`.env.example`](.env.example) to `.env` file and set your environment variables. Most of the vars should already be set by the creator of the project. Especially make sure that all the `PRODUCTION_*` vars are set (e.g `PRODUCTION_PASSWORD`).
 
-2. Start docker
+2. If this project contains git repositories (Bitbucket/Github), make sure you have SSH access to them.
+
+3. Start docker
 
 **3. Install**
 
-1. Clone production environment to your local development environment (Requires SSH access and production server credentials):
+a) Clone production environment to your local development environment (Requires SSH access and production server credentials):
 
 ```
 $ make start-clone
 ```
 
-2. Or kickstart your project:
+b) Or kickstart your project:
 
 ```
 $ make start
 ```
 
-Crab a cup of :coffee: as the installation process may take a while. If you are not able to run these please refer to the [Makefile](Makefile) and run the commands manually.
+If you are not able to run these please refer to the [Makefile](Makefile) and run the commands manually.
 
 **4. Navigate to [127.0.0.1:8000](http://127.0.0.1:8000) and setup WordPress**
 

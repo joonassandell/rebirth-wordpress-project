@@ -50,3 +50,7 @@ web/wp-content/plugins/*
 
 web/wp-content/languages/*
 !web/wp-content/languages/.gitkeep
+
+web/wp-content/cache
+advanced-cache.php
+web/wp-content/wp-rocket-config

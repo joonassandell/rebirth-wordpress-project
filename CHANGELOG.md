@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.0.5x] - 2019-03-21
+
+- Add required WPMS settings to `wp-config.example.php` & `.htaccess.example` to be ready for commented out
+- Revert `PRODUCTION_DOMAIN` -> `PRODUCTION_URL` &  `DEVELOPMENT_DOMAIN` -> `DEVELOPMENT_URL` because protocols may vary
+- Add WP-Rocket & update deps
+- Fix WPMS string replacing in database cloning & deploying
+- Update instructions for WPMS
+- Install theme node_modules automatically
+- Install theme composer dependencies automatically
+- `define('WP_DEV', true)` removed. Use real env variables instead for this.
+
 ## [0.0.4x] - 2019-06-26
 
 - Add WPMS support
