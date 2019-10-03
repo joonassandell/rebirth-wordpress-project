@@ -34,7 +34,7 @@ plan.local(['start', 'update', 'assets-push', 'db-replace'], local => {
   sshUser = plan.runtime.hosts[0].username;
   sshPort = plan.runtime.hosts[0].port;
   webRoot = plan.runtime.options.webRoot;
-  wpHome = plan.runtime.options.wpHome;
+  wpHome = plan.runtime.options.wpHome || '';
   url = plan.runtime.options.url;
   domain = url ? url.replace(/(^\w+:|^)\/\//, '') : '';
   dbName = plan.runtime.options.dbName;
@@ -150,7 +150,7 @@ plan.remote(['db-replace'], remote => {
         cd ${webRoot} 
         php wp-cli.phar search-replace --url=${process.env.DEVELOPMENT_URL} '${process.env.DEVELOPMENT_URL}' '${url}${wpHome}' --network --skip-columns=guid --skip-tables=wp_users,wp_blogs,wp_site
         php wp-cli.phar search-replace '${devDomain}' '${domain}' wp_blogs wp_site --network
-        php wp-cli.phar search-replace '^\/' '\/${wpHome}\/' wp_blogs --regex --network
+        php wp-cli.phar search-replace '^\/' '${wpHome}\/' wp_blogs --regex --network
       else
         cd ${webRoot}
         php wp-cli.phar search-replace '${process.env.DEVELOPMENT_URL}' '${url}${wpHome}' --skip-columns=guid --skip-tables=wp_users
