@@ -7,7 +7,7 @@
 - GNU/Linux/Unix with Docker ([Docker toolbox](https://www.docker.com/products/docker-toolbox), [Vagrant](https://www.vagrantup.com/downloads.html) VM with Docker, [native Linux with Docker](http://docs.docker.com/linux/step_one/) or [Docker for Mac](https://docs.docker.com/docker-for-mac/)).
 - [docker-compose](https://github.com/docker/compose)
 - [Node.js](http://nodejs.org/)
-- [Yarn](https://yarnpkg.com)
+- [Npm](https://npmpkg.com)
 - SSH access (RSA Key Pair) and [rsync](https://linux.die.net/man/1/rsync) for syncing assets, repositories and databases
 
 # Installation
@@ -53,7 +53,7 @@ Go to `web/wp-content/themes/{{theme-dir}}` to learn about the theme development
 
 # Usage
 
-All the commands are near equivalents to `$ docker` / `$ docker-compose` commands and `$ yarn ...` scripts. If you are not able to run these please refer to the [Makefile](Makefile), [package.json](package.json), [Docker compose reference](https://docs.docker.com/compose/reference) and [Docker CLI](https://docs.docker.com/engine/reference/commandline/).
+All the commands are near equivalents to `$ docker` / `$ docker-compose` commands and `$ npm ...` scripts. If you are not able to run these please refer to the [Makefile](Makefile), [package.json](package.json), [Docker compose reference](https://docs.docker.com/compose/reference) and [Docker CLI](https://docs.docker.com/engine/reference/commandline/).
 
 ## Local commands
 
@@ -77,7 +77,7 @@ Stop Docker containers.
 
 #### `$ make update`
 
-Update dependencies (Yarn, Composer).
+Update dependencies (Npm, Composer).
 
 #### `$ make rebuild`
 

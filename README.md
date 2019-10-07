@@ -16,7 +16,7 @@ This is a modern WordPress stack designed to work with [Rebirth](https://github.
 - GNU/Linux/Unix with Docker ([Docker toolbox](https://www.docker.com/products/docker-toolbox), [Vagrant](https://www.vagrantup.com/downloads.html) VM with Docker, [native Linux with Docker](http://docs.docker.com/linux/step_one/) or [Docker for Mac](https://docs.docker.com/docker-for-mac/)).
 - [docker-compose](https://github.com/docker/compose)
 - [Node.js](http://nodejs.org/)
-- [Yarn](https://yarnpkg.com)
+- [Npm](https://www.npmjs.com)
 
 ## Quick start
 
@@ -59,7 +59,7 @@ If you don't want to use Rebirth you can skip this step and create your theme in
 2. Create your theme with [Rebirth Yeoman Generator](https://github.com/joonasy/generator-rebirth)
 
 ```
-$ yarn global add yo && yarn global add generator-rebirth@beta
+$ npm install yo -g && npm install generator-rebirth@beta -g
 $ yo rebirth {{theme-dir}} --project=wordpress
 ```
 
