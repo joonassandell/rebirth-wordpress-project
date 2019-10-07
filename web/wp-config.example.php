@@ -35,8 +35,8 @@ switch (getenv('WORDPRESS_ENV')) {
         define('DB_PASSWORD', '');
         define('DB_HOST', 'localhost');
 
-        define('WP_HOME', 'https://{{production-domain}}');
-        define('WP_SITEURL', 'https://{{production-domain}}/wp');
+        define('WP_HOME', 'https://{{production-url}}');
+        define('WP_SITEURL', 'https://{{production-url}}/wp');
 
         define('WP_CONTENT_DIR', dirname(__FILE__) . '/wp-content');
         define('WP_CONTENT_URL', 'https://' . $_SERVER['HTTP_HOST'] . '/wp-content');
@@ -103,7 +103,7 @@ $table_prefix = 'wp_';
 // define('WP_ALLOW_MULTISITE', true);
 // define('MULTISITE', true);
 // define('SUBDOMAIN_INSTALL', false);
-// define('DOMAIN_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? getenv('DEVELOPMENT_URL') : '{{production-domain}}');
+// define('DOMAIN_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? getenv('DEVELOPMENT_URL') : '{{production-url}}');
 // define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/');
 // define('SITE_ID_CURRENT_SITE', 1);
 // define('BLOG_ID_CURRENT_SITE', 1);
