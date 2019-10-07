@@ -59,7 +59,7 @@ If you don't want to use Rebirth you can skip this step and create your theme in
 2. Create your theme with [Rebirth Yeoman Generator](https://github.com/joonasy/generator-rebirth)
 
 ```
-$ npm install yo -g && npm install generator-rebirth@beta -g
+$ npm install yo -g && npm install generator-rebirth -g
 $ yo rebirth {{theme-dir}} --project=wordpress
 ```
 
