@@ -18,11 +18,11 @@
     "production:update": "fly update:production --flightplan flightplan.remote.js"
   },
   "devDependencies": {
-    "dotenv": "^4.0.0",
-    "flightplan": "^0.6.15",
-    "node-gyp": "^3.8.0"
+    "dotenv": "^8.1.0",
+    "flightplan": "^0.6.20",
+    "node-gyp": "^6.0.0"
   },
   "engines": {
-    "node": ">=9.10.0"
+    "node": ">=10.13.0"
   }
 }
