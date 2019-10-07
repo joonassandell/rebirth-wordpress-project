@@ -4,8 +4,7 @@ This is a modern WordPress stack designed to work with [Rebirth](https://github.
 
 ## Features
 
-- Easy WordPress configuration with environment specific files
-- Environment variables with [Dotenv](https://github.com/vlucas/phpdotenv) & [dotenv](https://github.com/motdotla/dotenv#readme) for deployments
+- Easy WordPress configuration with environment specific files with [Dotenv](https://github.com/vlucas/phpdotenv) & [dotenv](https://github.com/motdotla/dotenv#readme) for deployments
 - Better folder structure
 - Uses composer for installing plugins. Includes useful plugins out of the box.
 - Automatic WordPress installation to remote location
@@ -122,7 +121,7 @@ This could be an issue with [OSX users](https://github.com/docker/for-mac/issues
 Following instructions setup WPMS to use blogs in sub folders.
 
 1. Read [Before You Create A Network](https://wordpress.org/support/article/before-you-create-a-network/)
-2. Add/uncomment the following lines to `wp-config.php:~103` and make sure they're set correctly:
+2. Add the following lines to `wp-config.php:~103` and make sure they're set correctly:
 
 ```
 /**
@@ -131,15 +130,15 @@ Following instructions setup WPMS to use blogs in sub folders.
 define('WP_ALLOW_MULTISITE', true);
 define('MULTISITE', true);
 define('SUBDOMAIN_INSTALL', false);
-define('DOMAIN_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? getenv('DEVELOPMENT_URL') : '{{production-url}}');
+define('DOMAIN_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '127.0.0.1' : 'example.com');
 define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/');
 define('SITE_ID_CURRENT_SITE', 1);
 define('BLOG_ID_CURRENT_SITE', 1);
 ```
 
-Also, copy the lines to `wp-config.example.php:~103` and **comment the last 5 (five) lines** to prevent errors if another developer has started the project without cloning.
+Also, copy the lines to `wp-config.example.php:~100` and **comment the last 5 (five) lines** to prevent errors if another developer has started the project without cloning.
 
-3. Add/uncomment the following in `.htaccess` & `.htaccess.example`:
+3. Add the following in `.htaccess` & `.htaccess.example`:
 
 ```
 # ======
@@ -171,11 +170,11 @@ RewriteRule . index.php [L]
 If you kickstarted the project:
 
 1. Login to WordPress, activate plugins and themes
-2. [Create A Network](https://wordpress.org/support/article/create-a-network). Multisite setup is already ready to be commented out in `web/wp-config.php:~92` & `web/.htaccess:~55`
+2. [Create A Network](https://wordpress.org/support/article/create-a-network). Multisite setup is already ready to be commented out in `web/wp-config.php:~100` & `web/.htaccess:~55`
 
 If you cloned the project:
 
-1. Uncomment all the lines in `web/wp-config.php:~92` to allow wpms functionality
+1. Uncomment all the lines in `web/wp-config.php:~100` to allow wpms functionality
 2. Login to WordPress with the production credentials
 ```
 

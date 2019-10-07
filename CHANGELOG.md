@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file. The format 
 
 ## [0.0.5x] - 2019-03-21
 
-- Add required WPMS settings to `wp-config.example.php` & `.htaccess.example` to be ready for commented out
+- Update WPMS instructions
 - Revert `PRODUCTION_DOMAIN` -> `PRODUCTION_URL` &  `DEVELOPMENT_DOMAIN` -> `DEVELOPMENT_URL` because protocols may vary
 - Add WP-Rocket & update deps
 - Fix WPMS string replacing in database cloning & deploying
