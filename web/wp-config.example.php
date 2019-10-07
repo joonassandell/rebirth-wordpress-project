@@ -7,7 +7,7 @@
  */
 
 /**
- * Load database info and local development parameters
+ * Load database info and local development settings
  */
 switch (getenv('WORDPRESS_ENV')) {
 	case "development": {
@@ -96,7 +96,6 @@ define('NONCE_SALT',       'put your unique phrase here');
  * a unique prefix. Only numbers, letters, and underscores please!
  */
 $table_prefix = 'wp_';
-
 
 /**
  * If we're behind a proxy server and using HTTPS, we need to alert Wordpress of that fact
