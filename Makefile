@@ -58,7 +58,7 @@ db-replace-clone:
 regenerate-thumbnails:
 	docker-compose exec web bash -c "wp media regenerate --yes --allow-root"
 
-replace-special-characters: 
+replace-special-characters:
 	docker-compose exec web bash -c "wp search-replace 'Ã„' 'Ä' --allow-root && \
 	  wp search-replace 'Ã¤' 'ä' --allow-root && \
 	  wp search-replace 'â€' '”' --allow-root && \
