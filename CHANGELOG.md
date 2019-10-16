@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file. The format 
 ## [0.0.6x] - 2019-08-10
 
 - Yarn -> Npm
+- Add missing .editorconfig
 
 ## [0.0.5x] - 2019-10-07
 
