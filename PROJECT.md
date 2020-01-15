@@ -138,7 +138,7 @@ Creates dump of your local database and replaces production database with the ne
 
 #### `$ make production-update`
 
-Update WordPress Composer dependencies.
+Update WordPress Composer dependencies. Note that if you have private repositories, you need to configure SSH key pair with the server and git remote.
 
 #### `$ make production-assets-push`
 

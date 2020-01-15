@@ -1,15 +1,21 @@
 # =======================================
-# Local commands
+# Local Commands
 # =======================================
 
 start:
 	npm install
-	cd web/wp-content/themes/{{theme-dir}} && npm
+	@if [ ! -f .env ]; then\
+		cp .env.example .env;\
+    fi
+	cd web/wp-content/themes/{{theme-dir}} && npm i
 	npm run --silent start
 
 start-clone:
 	npm install
-	cd web/wp-content/themes/{{theme-dir}} && npm
+	@if [ ! -f .env ]; then\
+		cp .env.example .env;\
+    fi
+	cd web/wp-content/themes/{{theme-dir}} && npm i
 	npm run --silent start
 	npm run --silent db:pull
 	npm run --silent assets:pull
@@ -67,11 +73,19 @@ replace-special-characters:
 		wp search-replace 'Ã¶' 'ö' --allow-root"
 
 composer:
-	docker run --rm --volumes-from={{name}}-web --workdir=/var/www/html/ composer/composer:alpine $(c)
+	docker run --rm --volumes-from=rebirth-wordpress-example-dev-web --workdir=/var/www/html/ composer/composer:alpine $(c)
+
+bootstrap:
+	rm -rf README.md
+	rm -rf CHANGELOG.md
+	mv PROJECT.MD README.md
+	@if [ ! -d .git ]; then\
+		git init && git add . && git commit -m "Init";\
+    fi
 
 
 # =======================================
-# Remote commands
+# Remote Commands
 # =======================================
 
 production-start:

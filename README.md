@@ -65,8 +65,7 @@ $ yo rebirth {{theme-dir}} --project=wordpress
 
 **4. Install all the dependencies and kickstart the project**
 
-1. Copy `.env.example` to `.env` and setup your environment variables
-2. Start docker and run:
+Start docker and run:
 
 ```
 $ make start
@@ -74,17 +73,9 @@ $ make start
 
 Crab a cup of :coffee: as the installation process may take a while. If you are not able to run these please refer to the [Makefile](Makefile) and run the commands manually.
 
-After the installation is done, navigate to [PROJECT.md](PROJECT.md) to learn about further installation process and available commands.
+**5. Clean up & recommended actions**
 
-**5. Recommended actions**
-
-1. Make sure `PROJECT.md` contains correct information such as correct remote git links
-2. Delete the following files
-   - This `README.md`
-   - Rename `PROJECT.md` to `README.md`
-   - `CHANGELOG.md`
-   - `.git` folder
-3. Git init your fresh new project and remember to init your theme as well
+Run `$ make bootstrap`. Note that the script will remove this file and rename `PROJECT.MD` to `README.md`. See the new [README.md](README.md) to learn about further installation process, available commands and make sure it contains correct information such as remote git links.
 
 Happy developing!
 
@@ -96,7 +87,7 @@ See [CHANGELOG.md](/CHANGELOG.md)
 
 ### About plugins
 
-- If you're using caching or optimization plugins such as [Autoptimize](https://wordpress.org/plugins/autoptimize/) or [W3 Total Cache](https://wordpress.org/plugins/w3-total-cache/) you should disable locally because they might create issues with CORS, BrowserSync etc. Most of the time caching isn't necessary while developing anyways.
+If you're using caching or optimization plugins such as [Autoptimize](https://wordpress.org/plugins/autoptimize/) or [W3 Total Cache](https://wordpress.org/plugins/w3-total-cache/) you should disable locally because they might create issues with CORS, BrowserSync etc. Most of the time caching isn't necessary while developing anyways.
 
 ### Why is `web/wp-content/themes` ignored?
 
@@ -105,16 +96,6 @@ By default `web/wp-content/themes` is ignored by git because we don't want this 
 ### Why using `wordpress:php*-apache` docker image if installing WordPress w/ composer?
 
 Because the official image includes all the basics WordPress requires. Image could very well be `php:*-apache` etc. as well.
-
-### I cannot clone a private bitbucket repository w/ composer
-
-This could be an issue with [OSX users](https://github.com/docker/for-mac/issues/410). The easiest way to solve this is to use bitbuckets "App Password" [solution](https://stackoverflow.com/questions/23391839/clone-private-git-repo-with-dockerfile):
-
-1. Go to your App Password settings: `Bitbucket settings -> Access Management -> App Password`
-2. Create a password and give it all the permissions. Copy password to your own personal secure location.
-3. In `composer.json` replace your private repository url to include your credentials `https://username:app_password@bitbucket.org/author/repository.git`
-
-**Do not commit the above changes** just use it temporarily to get the repository.
 
 ### How to setup a [multisite network](https://wordpress.org/support/article/before-you-create-a-network/)
 
@@ -189,3 +170,7 @@ If you cloned the project:
    - If using WPMS change `define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/');` to `define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/myhome/');`
 2. In .env add your home dir to `PRODUCTION_WP_HOME` (e.g. `PRODUCTION_WP_HOME=/myhome`) so that replacing databases works correctly
 3. In .htaccess make sure rewritebase is `RewriteBase /myhome` (not needed in WPMS)
+
+## License
+
+Copyright (c) 2020 Joonas Ylitalo (Twitter: [@joonasy](https://twitter.com/joonasy)). Licensed under the MIT license.
