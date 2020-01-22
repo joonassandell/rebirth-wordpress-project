@@ -86,7 +86,7 @@ plan.remote(['start', 'update'], remote => {
   remote.exec(`mkdir ${webRoot}/vendor`, { failsafe: true });
   remote.with(`cd ${webRoot}/`, { failsafe: true }, () => { remote.exec(`
     php composer.phar update --prefer-dist --no-dev --optimize-autoloader --no-interaction \
-    && php composer.phar update -d=${webRoot}/wp-content/plugins/wp-rocket --no-dev
+    && php composer.phar update -d ${webRoot}/wp-content/plugins/wp-rocket --no-dev
   `)});
 
   remote.log('Removing uploaded files...');
@@ -147,9 +147,9 @@ plan.remote(['db-replace'], remote => {
       mv wp-cli.phar ${webRoot}
     fi
 
-    if $(cd ${webRoot} && php wp-cli.phar --url=${url} core is-installed --network); 
+    if $(cd ${webRoot} && php wp-cli.phar --url=${url} core is-installed --network);
       then
-        cd ${webRoot} 
+        cd ${webRoot}
         php wp-cli.phar search-replace --url=${process.env.DEVELOPMENT_URL} '${process.env.DEVELOPMENT_URL}' '${url}${wpHome}' --network --skip-columns=guid --skip-tables=wp_users,wp_blogs,wp_site
         php wp-cli.phar search-replace '${devDomain}' '${domain}' wp_blogs wp_site --network
         php wp-cli.phar search-replace '^\/' '${wpHome}\/' wp_blogs --regex --network
