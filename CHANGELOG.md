@@ -2,19 +2,20 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [0.0.7x] - 2020-01-15
+## [0.0.7] - 2020-01-15
 
 - Automatically delete unnecessary files & git init with `$ make bootstrap`
 - Automatically install theme node_modules
 - Automatically add .env.example -> .env
 - Tweaked instructions, updated deps
+- Don't ignore `web/wp-content/themes/*` by default to keep things simple
 
-## [0.0.6x] - 2019-08-10
+## [0.0.6] - 2019-08-10
 
 - Yarn -> Npm
 - Add missing .editorconfig
 
-## [0.0.5x] - 2019-10-07
+## [0.0.5] - 2019-10-07
 
 - Update WPMS instructions
 - Revert `PRODUCTION_DOMAIN` -> `PRODUCTION_URL` &  `DEVELOPMENT_DOMAIN` -> `DEVELOPMENT_URL` because protocols may vary
@@ -25,7 +26,7 @@ All notable changes to this project will be documented in this file. The format 
 - Install theme composer dependencies automatically
 - `define('WP_DEV', true)` removed. Use real env variables instead for this.
 
-## [0.0.4x] - 2019-06-26
+## [0.0.4] - 2019-06-26
 
 - Add WPMS support
 - Use [WP-CLI](https://wp-cli.org)

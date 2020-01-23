@@ -89,9 +89,15 @@ See [CHANGELOG.md](/CHANGELOG.md)
 
 If you're using caching or optimization plugins such as [Autoptimize](https://wordpress.org/plugins/autoptimize/) or [W3 Total Cache](https://wordpress.org/plugins/w3-total-cache/) you should disable locally because they might create issues with CORS, BrowserSync etc. Most of the time caching isn't necessary while developing anyways.
 
-### Why is `web/wp-content/themes` ignored?
+### Should `web/wp-content/themes` be ignored?
 
-By default `web/wp-content/themes` is ignored by git because we don't want this development repository to track theme related changes nor we want to use submodules. This is recommended practice since things may get messy if we have multiple themes in a single project. If for some reason you want to track these changes, remove `web/wp-content/themes/*` from `.gitignore`.
+By default `web/wp-content/themes` is not ignored by git because we want to keep things simple by keeping all the development material in the same repository. If you don't want this development repository to track theme related changes just add the following to `.gitignore` and remember to document on how to pull your theme.
+
+```
+web/wp-content/themes/*
+!web/wp-content/themes/.gitkeep
+```
+
 
 ### Why using `wordpress:php*-apache` docker image if installing WordPress w/ composer?
 
