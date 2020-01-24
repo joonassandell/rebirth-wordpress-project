@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file. The format 
 - Automatically add .env.example -> .env
 - Tweaked instructions, updated deps
 - Don't ignore `web/wp-content/themes/*` by default to keep things simple
+- Run theme build automatically in start
 
 ## [0.0.6] - 2019-08-10
 

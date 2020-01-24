@@ -7,7 +7,6 @@ start:
 	@if [ ! -f .env ]; then\
 		cp .env.example .env;\
     fi
-	cd web/wp-content/themes/{{theme-dir}} && npm i
 	npm run --silent start
 
 start-clone:
@@ -15,7 +14,6 @@ start-clone:
 	@if [ ! -f .env ]; then\
 		cp .env.example .env;\
     fi
-	cd web/wp-content/themes/{{theme-dir}} && npm i
 	npm run --silent start
 	npm run --silent db:pull
 	npm run --silent assets:pull

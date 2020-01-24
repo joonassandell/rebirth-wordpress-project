@@ -42,13 +42,11 @@ plan.local(['start', 'assets-pull', 'db-pull', 'db-replace'], (local) => {
 plan.local(['start'], (local) => {
   local.log('Preparing files and installing dependencies...');
   local.exec(`
-    if [ ! -f web/.htaccess ]
-      then
+    if [ ! -f web/.htaccess ]; then
         cp web/.htaccess.example web/.htaccess
     fi
 
-    if [ ! -f web/wp-config.php ]
-      then
+    if [ ! -f web/wp-config.php ]; then
         cp web/wp-config.example.php web/wp-config.php
     fi
 
@@ -58,6 +56,11 @@ plan.local(['start'], (local) => {
     fi
 
     docker-compose up -d
+
+    if [ -f web/wp-content/themes/{{theme-dir}}/package.json ]; then
+      npm --prefix web/wp-content/themes/{{theme-dir}} install && \
+      npm --prefix web/wp-content/themes/{{theme-dir}} run build
+    fi
 
     if [ -f web/wp-content/themes/{{theme-dir}}/composer.json ]; then
       docker run --rm -v ${process.env.DEVELOPMENT_SSH_KEYS_PATH}:/root/.ssh \
