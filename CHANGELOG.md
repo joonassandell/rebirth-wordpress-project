@@ -2,11 +2,14 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [0.0.7] - 2020-01-15
+## [0.0.7] - 2020-02-06
 
 - Automatically delete unnecessary files & git init with `$ make bootstrap`
 - Automatically install theme node_modules
 - Automatically add .env.example -> .env
+- Automatically add theme .env.example -> .env
+- Fix if someone accidentally adds "/" to home variable (PRODUCTION_WP_HOME=/). 
+- Add missing --allow-root
 - Tweaked instructions, updated deps
 - Don't ignore `web/wp-content/themes/*` by default to keep things simple
 - Run theme build automatically in start
