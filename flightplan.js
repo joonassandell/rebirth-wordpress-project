@@ -28,7 +28,7 @@ plan.local(['start', 'assets-pull', 'db-pull', 'db-replace'], (local) => {
   webRoot = plan.runtime.options.webRoot;
   url = plan.runtime.options.url;
   domain = url ? url.replace(/(^\w+:|^)\/\//, '') : '';
-  wpHome = plan.runtime.options.wpHome;
+  wpHome = plan.runtime.options.wpHome === '/' ? plan.runtime.options.wpHome = '' : plan.runtime.options.wpHome || '';
   dbName = plan.runtime.options.dbName;
   dbUser = plan.runtime.options.dbUser;
   dbPw = plan.runtime.options.dbPw;
@@ -171,11 +171,11 @@ plan.local(['db-replace'], (local) => {
     docker-compose exec web bash -c " \
       if \$(wp --url=${url} core is-installed --network --allow-root);
         then
-          wp search-replace --url='${url}${wpHome}' '${url}${wpHome}' '${process.env.DEVELOPMENT_URL}' --network --allow-root --skip-columns=guid --recurse-objects --skip-tables=wp_users,wp_blogs,wp_site
+          wp search-replace --url='${url}${wpHome}' '${url}${wpHome}' '${process.env.DEVELOPMENT_URL}' --network --allow-root --skip-columns=guid  --skip-tables=wp_users,wp_blogs,wp_site
           wp search-replace '${domain}' '${devDomain}' wp_blogs wp_site --allow-root --network
           wp search-replace '${wpHome}' '' wp_blogs --allow-root --network
         else
-          wp search-replace '${url}${wpHome}' '${process.env.DEVELOPMENT_URL}' --skip-columns=guid --skip-tables=wp_users
+          wp search-replace '${url}${wpHome}' '${process.env.DEVELOPMENT_URL}' --skip-columns=guid --skip-tables=wp_users --allow-root
       fi
     "
   `, { failsafe: true });
