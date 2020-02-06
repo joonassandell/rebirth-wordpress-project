@@ -83,7 +83,7 @@ Happy developing!
 
 See [CHANGELOG.md](/CHANGELOG.md)
 
-## Notes
+## Notes & FAQ
 
 ### About plugins
 
@@ -98,14 +98,11 @@ web/wp-content/themes/*
 !web/wp-content/themes/.gitkeep
 ```
 
-
 ### Why using `wordpress:php*-apache` docker image if installing WordPress w/ composer?
 
 Because the official image includes all the basics WordPress requires. Image could very well be `php:*-apache` etc. as well.
 
 ### How to setup a [multisite network](https://wordpress.org/support/article/before-you-create-a-network/)
-
-Following instructions setup WPMS to use blogs in sub folders.
 
 1. Read [Before You Create A Network](https://wordpress.org/support/article/before-you-create-a-network/)
 2. Add the following lines to `wp-config.php:~103` and make sure they're set correctly:
@@ -176,6 +173,10 @@ If you cloned the project:
    - If using WPMS change `define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/');` to `define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/myhome/');`
 2. In .env add your home dir to `PRODUCTION_WP_HOME` (e.g. `PRODUCTION_WP_HOME=/myhome`) so that replacing databases works correctly
 3. In .htaccess make sure rewritebase is `RewriteBase /myhome` (not needed in WPMS)
+
+### I'm getting the error `the input device is not a TTY` 
+
+Try to add `export COMPOSE_INTERACTIVE_NO_CLI=1` to your shell and if it works you should add it to your bash profile. [https://github.com/docker/compose/issues/5696](https://github.com/docker/compose/issues/5696) 
 
 ## License
 

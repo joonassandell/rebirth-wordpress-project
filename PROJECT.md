@@ -22,9 +22,9 @@ $ git clone git@bitbucket.org:{{author}}/{{name}}.git
 
 1. Copy [`.env.example`](.env.example) to `.env` file and set your environment variables. Most of the vars should already be set by the creator of the project. Especially make sure that all the `PRODUCTION_*` vars are set (e.g `PRODUCTION_PASSWORD`).
 
-2. If this project contains git repositories (Bitbucket/Github), make sure you have SSH access to them.
+2. If this project contains secret Git repositories, make sure you have SSH access to them.
 
-3. Start docker
+3. Start Docker
 
 **3. Install**
 
@@ -80,7 +80,7 @@ Update dependencies (Npm, Composer).
 
 #### `$ make rebuild`
 
-Rebuilds and reinstall containers, including your MySQL container (Note that you will lose your current data).
+Rebuilds and reinstall containers, including your MySQL container (**Note that you will lose your current data**).
 
 #### `$ make web-bash`
 
@@ -116,7 +116,7 @@ Regenerate WordPress thumbnails with WP-CLI.
 
 ## Remote commands
 
-**:warning: Be extremely careful with the remote commands or you may break the server configuration! You need SSH access for the remote commands.** Make sure all the production server credentials are set in the `.env` file and [config.js](config.js) has the correct urls set in `opts`.
+**:warning: Be extremely careful with the remote commands or you may break the server configuration! You need SSH access for the remote commands.** Make sure all the production server credentials are set in the `.env` file.
 
 #### `$ make production-start`
 
