@@ -85,8 +85,7 @@ plan.remote(['start', 'update'], remote => {
   remote.log('Installing Composer dependencies...');
   remote.exec(`mkdir ${webRoot}/vendor`, { failsafe: true });
   remote.with(`cd ${webRoot}/`, { failsafe: true }, () => { remote.exec(`
-    php composer.phar update --prefer-dist --no-dev --optimize-autoloader --no-interaction \
-    && php composer.phar update -d ${webRoot}/wp-content/plugins/wp-rocket --no-dev
+    php composer.phar update --prefer-dist --no-dev --optimize-autoloader --no-interaction
   `)});
 
   remote.log('Removing uploaded files...');

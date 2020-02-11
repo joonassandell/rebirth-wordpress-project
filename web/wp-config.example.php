@@ -25,7 +25,7 @@ switch (getenv('WORDPRESS_ENV')) {
         define('SAVEQUERIES', true);
         define('WP_DEBUG', true);
         define('FS_METHOD', 'direct');
-        
+
         break;
 	}
 
@@ -40,12 +40,12 @@ switch (getenv('WORDPRESS_ENV')) {
 
         define('WP_CONTENT_DIR', dirname(__FILE__) . '/wp-content');
         define('WP_CONTENT_URL', 'https://' . $_SERVER['HTTP_HOST'] . '/wp-content');
-        
+
         define('WP_DEBUG', true);
         define('WP_DEBUG_DISPLAY', false);
         define('WP_DEBUG_LOG', true);
         ini_set('display_errors', 0);
-        
+
         break;
 	}
 }
@@ -59,17 +59,6 @@ define('DB_CHARSET', 'utf8');
  * The Database Collate type. Don't change this if in doubt
  */
 define('DB_COLLATE', '');
-
-/**
- * WP Rocket credentials
- */
-if (!defined('WP_ROCKET_KEY')) {
-	define('WP_ROCKET_KEY', '{{wp-rocket-key}}');
-}
-
-if (!defined('WP_ROCKET_EMAIL')) {
-	define('WP_ROCKET_EMAIL', '{{wp-rocket-email}}');
-}
 
 /**
  * Authentication Unique Keys and Salts.
@@ -113,6 +102,6 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Sets up WordPress vars and included files. 
+ * Sets up WordPress vars and included files.
  */
 require_once(ABSPATH . 'wp-settings.php');

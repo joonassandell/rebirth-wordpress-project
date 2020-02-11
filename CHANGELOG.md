@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file. The format 
 - Don't ignore `web/wp-content/themes/*` by default to keep things simple
 - Run theme build automatically in start
 - Don't skip guid in database replaces
+- Remove WP-Rocket, add litespeed instead
 
 ## [0.0.6] - 2019-08-10
 

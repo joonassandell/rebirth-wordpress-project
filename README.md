@@ -23,7 +23,7 @@ This is a modern WordPress stack designed to work with [Rebirth](https://github.
 Quickly install with [create-project](https://github.com/mafintosh/create-project). Add your values to the following one-liner:
 
 ```
-$ npx create-project my-project-dir-dev joonasy/rebirth-wordpress-dev --human-name="My Project" --theme-dir=my-theme-dir --author=joonasy --production-url=my-project.com --wpml-user-id="=8365..." --wpml-key="=..." --acf-key="=..." --wp-rocket-key="..." --wp-rocket-email="..."
+$ npx create-project my-project-dir-dev joonasy/rebirth-wordpress-dev --human-name="My Project" --theme-dir=my-theme-dir --author=joonasy --production-url=my-project.com --wpml-user-id="=8365..." --wpml-key="=..." --acf-key="=..."
 ```
 
 After the installation is done jump to phase 3 in the next section.
@@ -46,10 +46,8 @@ This development template assumes that you are using [Rebirth](https://github.co
 - `{{wpml-user-id}}` WPML user id. (e.g. `=8365`, _Note that you need to add the `=` sign in front here and in the following variables_)
 - `{{wpml-key}}` WPML subscription key (e.g. `=gxNTN8dHlwZ...`)
 - `{{acf-key}}` ACF subscription key (e.g. `=9wZXJ8ZGF0...`)
-- `{{wp-rocket-key}}` WP Rocket subscription key (e.g. `i91e...`)
-- `{{wp-rocket-email}}` WP Rocket email (e.g. `example@email.com`)
 
-By default this template requires [WPML](http://wpml.org), [WP Rocket](https://wp-rocket.me) and [ACF](https://www.advancedcustomfields.com) so you need to have those plugins purchased. ACF subscription key can be found from [advancedcustomfields.com/my-account](https://www.advancedcustomfields.com/my-account) and WPML user id and subscription key can be found from the download urls in [wpml.org/account/downloads/?user_id=YOUR_USER_ID&subscription_key=YOUR_KEY](https://wpml.org/account/downloads/). WP Rocket credentials can be copied from [your profile](https://wp-rocket.me/account/) by downloding the zip (`licence-data.php`). _If you don't need these plugins remove them from the [web/composer.json](web/composer.json)_.
+By default this template requires [WPML](http://wpml.org) and [ACF](https://www.advancedcustomfields.com) so you need to have those plugins purchased. ACF subscription key can be found from [advancedcustomfields.com/my-account](https://www.advancedcustomfields.com/my-account) and WPML user id and subscription key can be found from the download urls in [wpml.org/account/downloads/?user_id=YOUR_USER_ID&subscription_key=YOUR_KEY](https://wpml.org/account/downloads/). _If you don't need these plugins remove them from the [web/composer.json](web/composer.json)_.
 
 **3. Install theme with Rebirth Yeoman generator**
 

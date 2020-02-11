@@ -71,12 +71,6 @@ plan.local(['start'], (local) => {
     docker run --rm -v ${process.env.DEVELOPMENT_SSH_KEYS_PATH}:/root/.ssh \
     --volumes-from={{name}}-web \
     --workdir=/var/www/html/ composer/composer update
-
-    if [ -f web/wp-content/plugins/wp-rocket/composer.json ]; then
-      docker run --rm -v ${process.env.DEVELOPMENT_SSH_KEYS_PATH}:/root/.ssh \
-      --volumes-from={{name}}-web \
-      --workdir=/var/www/html/wp-content/plugins/wp-rocket composer/composer update --no-dev
-    fi
   `);
 });
 
