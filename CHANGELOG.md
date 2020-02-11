@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.0.8] - 2020-02-11
+
+- Don't ignore `database/wordpress.sql` so other/future developers have some sort of starting point with the project
+- Use locally installed composer (so it is a requirement now) because the composer image created issues with linux platforms & SSH keys
+- Add new commands to "commit" and reset databases. See [PROJECT.md](PROJECT.md) and [makefile](makefile)
+- Don't recommend using `$ make start-clone` in the first place since it may cause heavy process in the production environment
+- Better instructions
+- Better logging in flightplans
+
 ## [0.0.7] - 2020-02-06
 
 - Automatically delete unnecessary files & git init with `$ make bootstrap`

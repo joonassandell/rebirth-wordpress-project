@@ -1,4 +1,4 @@
-# {{human-name}} - Development environment
+# {{human-name}}
 
 > Docker development environment for {{human-name}}. Started with [rebirth-wordpress-dev](https://github.com/joonasy/rebirth-wordpress-dev.git).
 
@@ -6,16 +6,16 @@
 
 - GNU/Linux/Unix with Docker ([Docker toolbox](https://www.docker.com/products/docker-toolbox), [Vagrant](https://www.vagrantup.com/downloads.html) VM with Docker, [native Linux with Docker](http://docs.docker.com/linux/step_one/) or [Docker for Mac](https://docs.docker.com/docker-for-mac/)).
 - [docker-compose](https://github.com/docker/compose)
-- [Node.js](http://nodejs.org/)
-- [Npm](https://npmpkg.com)
+- [Node.js & Npm](http://nodejs.org/)
+- [Composer](https://getcomposer.org/)
 - SSH access (RSA Key Pair) and [rsync](https://linux.die.net/man/1/rsync) for syncing assets, repositories and databases
 
 # Installation
 
-**1. Clone this repository and the theme repository**
+**1. Clone this repository**
 
 ```
-$ git clone git@bitbucket.org:{{author}}/{{name}}.git
+$ git clone git@bitbucket.org:{{author}}/{{name}}.git && cd {{name}}
 ```
 
 **2. Prepare for installation**
@@ -28,23 +28,15 @@ $ git clone git@bitbucket.org:{{author}}/{{name}}.git
 
 **3. Install**
 
-a) Clone production environment to your local development environment (Requires SSH access and production server credentials):
-
-```
-$ make start-clone
-```
-
-b) Or kickstart your project:
-
 ```
 $ make start
 ```
 
-If you are not able to run these please refer to the [Makefile](Makefile) and run the commands manually.
+Alternatively clone production environment to your local development environment with `$ make start-clone` **but note that this could be very heavy process, so do it with care**. If you are not able to run these commands please refer to the [Makefile](Makefile) and run the commands manually.
 
-**4. Navigate to [127.0.0.1:8000](http://127.0.0.1:8000) and setup WordPress**
+**4. Navigate to [127.0.0.1:8000](http://127.0.0.1:8000)**
 
-Login to WordPress, activate plugins and theme if you kickstarted the project, otherwise just login to WordPress with the production credentials and verify everything works properly.
+Login to WordPress, activate plugins and themes if not already activated. Assets such as images are probably not working, so if you need them you can download them with `$ make assets-pull`.
 
 **5. Start theme development**
 
@@ -60,11 +52,11 @@ These commands are for setting up your local development environment.
 
 #### `$ make start`
 
-Kickstart your project from scratch. Builds, creates and starts Docker containers, creates fresh database and updates all dependencies.
+Start your project. Builds, creates and starts Docker containers, imports database from `database/wordpress.sql` and installs all dependencies.
 
 #### `$ make start-clone`
 
-Clone production environment to your local development environment. Builds, creates and starts Docker containers, updates all dependencies, pulls assets, pulls MySQL dump, replaces local database with the remote database. Make sure database server credentials are set in the `.env` file.
+Clone production environment to your local development environment. Builds, creates and starts Docker containers, updates all dependencies, pulls assets, pulls MySQL dump, replaces local database with the remote database. Make sure database server credentials are set in the `.env` file. **Note that this could be very heavy process, so do it with care**
 
 #### `$ make up`
 
@@ -80,7 +72,7 @@ Update dependencies (Npm, Composer).
 
 #### `$ make rebuild`
 
-Rebuilds and reinstall containers, including your MySQL container (**Note that you will lose your current data**).
+Rebuilds and reinstall containers, including your MySQL container. **Note that you will lose your current data**.
 
 #### `$ make web-bash`
 
@@ -96,15 +88,27 @@ Pull uploaded files from production environment (`uploads/` folder etc.) to your
 
 #### `$ make db-pull`
 
-Create and pull MySQL dump from the production environment to `database/remote` folder, backup current database to `database/local` folder and place the pulled dump ready for importing/replacing (`database/wordpress.sql`). Make sure database server credentials are set in the `.env` file.
+Create and pull MySQL dump from the production environment to `database/remote` folder, backup current database to `database/local` folder and place the pulled dump ready for replacing in`/database/remote/wordpress.sql`. **Note that this could be very heavy process, so do it with care**.
 
 #### `$ make db-replace`
 
-Backups current database and replaces it with `database/wordpress.sql` dump.
+Backups current database and replaces it with `database/remote/wordpress.sql` dump.
 
 #### `$ make db-replace-clone`
 
 Shorcut for `$ make db-pull` & `$ make db-replace`.
+
+#### `$ make db-clean`
+  
+Cleans up dumps from `database/local` and `database/remote` to save disk space.
+
+#### `$ make db-commit`
+
+Creates dump to `database/wordpress.sql` from your local database. Idea here is to update database to git for other developers to use. Make sure everything works fine before doing this and then commit the new dump.
+
+#### `$ make db-reset`
+
+Reset your local database by replacing it with `database/wordpress.sql`.
 
 #### `$ make replace-special-characters`
 
@@ -116,11 +120,11 @@ Regenerate WordPress thumbnails with WP-CLI.
 
 ## Remote commands
 
-**:warning: Be extremely careful with the remote commands or you may break the server configuration! You need SSH access for the remote commands.** Make sure all the production server credentials are set in the `.env` file.
+**:warning: Be extremely careful with the remote commands or you may break the server configuration! You need SSH access for the remote commands.**
 
 #### `$ make production-start`
 
-Install WordPress and plugins to the production server. This is most likely **required only once**, so be careful not to reinstall accidentally.
+Install WordPress and plugins to the production server. This is most likely required only once, so be careful not to reinstall accidentally.
 
 You may want to:
 
@@ -133,7 +137,7 @@ If you want to add new new server environments you need to modify [flightplan.re
 
 #### `$ make production-db-replace-clone`
 
-Creates dump of your local database and replaces production database with the newly created dump. Runs SQL commands from the `database/migrate.remote.txt` file.
+Creates dump of your local database and replaces production database with the newly created dump.
 
 #### `$ make production-update`
 

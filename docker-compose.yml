@@ -21,4 +21,4 @@ services:
     env_file:
       - ./.env
     volumes:
-      - ./database:/database
+      - ./database:/docker-entrypoint-initdb.d

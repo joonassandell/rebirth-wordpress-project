@@ -30,9 +30,11 @@ docker-compose.override.yml
 # ======
 
 node_modules
+web/.htaccess_lscache*
 
 database/*
 !database/.gitkeep
+!database/wordpress.sql
 
 web/wp
 web/vendor

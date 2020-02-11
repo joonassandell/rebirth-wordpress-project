@@ -71,7 +71,11 @@ $ make start
 
 Crab a cup of :coffee: as the installation process may take a while. If you are not able to run these please refer to the [Makefile](Makefile) and run the commands manually.
 
-**5. Clean up & recommended actions**
+**5. Navigate to [127.0.0.1:8000](http://127.0.0.1:8000)**
+
+Login to WordPress, activate plugins and themes if not already activated.
+
+**6. Clean up & recommended actions**
 
 Run `$ make bootstrap`. Note that the script will remove this file and rename `PROJECT.MD` to `README.md`. See the new [README.md](README.md) to learn about further installation process, available commands and make sure it contains correct information such as remote git links.
 
@@ -96,11 +100,17 @@ web/wp-content/themes/*
 !web/wp-content/themes/.gitkeep
 ```
 
+### Should `database/wordpress.sql` be ignored?
+
+Well maybe but it's easier for other developers to install the project in the future if they have some starting point. If you don't like this, just remove the `!database/wordpress.sql` from `.gitignore`.
+
 ### Why using `wordpress:php*-apache` docker image if installing WordPress w/ composer?
 
 Because the official image includes all the basics WordPress requires. Image could very well be `php:*-apache` etc. as well.
 
 ### How to setup a [multisite network](https://wordpress.org/support/article/before-you-create-a-network/)
+
+This guide assumes that the project contains a MySQL dump in `database/wordpress.sql`.
 
 1. Read [Before You Create A Network](https://wordpress.org/support/article/before-you-create-a-network/)
 2. Add the following lines to `wp-config.php:~103` and make sure they're set correctly:
@@ -113,14 +123,12 @@ define('WP_ALLOW_MULTISITE', true);
 define('MULTISITE', true);
 define('SUBDOMAIN_INSTALL', false);
 define('DOMAIN_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '127.0.0.1' : 'example.com');
-define('PATH_CURRENT_SITE', getenv('WORDPRESS_ENV') == 'development' ? '/' : '/');
+define('PATH_CURRENT_SITE', '/');
 define('SITE_ID_CURRENT_SITE', 1);
 define('BLOG_ID_CURRENT_SITE', 1);
 ```
 
-Also, copy the lines to `wp-config.example.php:~100` and **comment the last 5 (five) lines** to prevent errors if another developer has started the project without cloning.
-
-3. Add the following in `.htaccess` & `.htaccess.example`:
+3. Replace the following in `.htaccess` & `.htaccess.example`:
 
 ```
 # ======
@@ -145,22 +153,10 @@ RewriteRule . index.php [L]
 </IfModule>
 # END WordPress
 ```
+4. Change all strings with `127.0.0.1:8000` to `127.0.0.1` and change `ports: 8000:80` to `ports: 80:80` in `docker-compose.yml`. E.g. make sure you [_don't_ have port in the dev url](https://wordpress.org/support/article/before-you-create-a-network/#restrictions).
 
-4. In the projects README, replace the line `Login to WordPress, activate plugins ... works properly.` with the following:
+5. Update your database dump once you have created network and added sub blogs with `$ make db-commit`. Remember commit all your changes.
 
-```
-If you kickstarted the project:
-
-1. Login to WordPress, activate plugins and themes
-2. [Create A Network](https://wordpress.org/support/article/create-a-network). Multisite setup is already ready to be commented out in `web/wp-config.php:~100` & `web/.htaccess:~55`
-
-If you cloned the project:
-
-1. Uncomment all the lines in `web/wp-config.php:~100` to allow wpms functionality
-2. Login to WordPress with the production credentials
-```
-
-5. Change `DEVELOPMENT_URL=127.0.0.1:8000` to `DEVELOPMENT_URL=127.0.0.1`. E.g. make sure you [_don't_ have port in the dev url](https://wordpress.org/support/article/before-you-create-a-network/#restrictions).
 
 ### In production my WordPress home is located in a subdir (e.g. https://{{production-url}}/myhome). How to make it work?
 

@@ -46,6 +46,16 @@ assets-pull:
 db-backup:
 	npm run --silent db:backup
 
+db-clean:
+	rm -rf database/local
+	rm -rf database/remote
+
+db-commit:
+	npm run --silent db:commit
+
+db-reset:
+	npm run --silent db:reset
+
 db-pull:
 	npm run --silent db:backup
 	npm run --silent db:pull
