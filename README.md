@@ -7,7 +7,7 @@ This is a modern WordPress stack designed to work with [Rebirth](https://github.
 - Easy WordPress configuration with environment specific files with [Dotenv](https://github.com/vlucas/phpdotenv) & [dotenv](https://github.com/motdotla/dotenv#readme) for deployments
 - Better folder structure
 - Uses composer for installing plugins. Includes useful plugins out of the box.
-- Automatic WordPress installation to remote location
+- WordPress installation to remote location
 - Scripts for deploying databases and assets to remote locations
 - Scripts for pulling assets and databases from remote locations
 
@@ -73,11 +73,13 @@ Crab a cup of :coffee: as the installation process may take a while. If you are 
 
 **5. Navigate to [127.0.0.1:8000](http://127.0.0.1:8000)**
 
-Login to WordPress, activate plugins and themes if not already activated.
+Login to WordPress, activate plugins and themes if not already activated. 
 
 **6. Clean up & recommended actions**
 
 Run `$ make bootstrap`. Note that the script will remove this file and rename `PROJECT.MD` to `README.md`. See the new [README.md](README.md) to learn about further installation process, available commands and make sure it contains correct information such as remote git links.
+
+Once you have added some data to your project you should create initial MySQL dump with `$ make db-commit` and commit the new dump (`database/wordpress.sql`) so that future/other developers have better starting point with the project.
 
 Happy developing!
 

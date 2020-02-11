@@ -86,7 +86,7 @@ composer:
 bootstrap:
 	rm -rf README.md
 	rm -rf CHANGELOG.md
-	mv PROJECT.MD README.md
+	mv PROJECT.md README.md
 	@if [ ! -d .git ]; then\
 		git init && git add . && git commit -m "Init";\
     fi
