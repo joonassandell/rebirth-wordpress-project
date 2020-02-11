@@ -15,10 +15,6 @@
       "url": "https://packagist.org"
     },
     {
-      "type": "vcs",
-      "url": "https://github.com/tabrisrp/wp-background-processing"
-    },
-    {
       "type": "package",
       "package": {
         "name": "advanced-custom-fields/advanced-custom-fields-pro",
