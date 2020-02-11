@@ -150,12 +150,12 @@ plan.remote(['db-replace'], remote => {
     if $(cd ${webRoot} && php wp-cli.phar --url=${url} core is-installed --network);
       then
         cd ${webRoot}
-        php wp-cli.phar search-replace --url=${process.env.DEVELOPMENT_URL} '${process.env.DEVELOPMENT_URL}' '${url}${wpHome}' --network --skip-columns=guid --skip-tables=wp_users,wp_blogs,wp_site
+        php wp-cli.phar search-replace --url=${process.env.DEVELOPMENT_URL} '${process.env.DEVELOPMENT_URL}' '${url}${wpHome}' --network -skip-tables=wp_users,wp_blogs,wp_site
         php wp-cli.phar search-replace '${devDomain}' '${domain}' wp_blogs wp_site --network
         php wp-cli.phar search-replace '^\/' '${wpHome}\/' wp_blogs --regex --network
       else
         cd ${webRoot}
-        php wp-cli.phar search-replace '${process.env.DEVELOPMENT_URL}' '${url}${wpHome}' --skip-columns=guid --skip-tables=wp_users
+        php wp-cli.phar search-replace '${process.env.DEVELOPMENT_URL}' '${url}${wpHome}' --skip-tables=wp_users
     fi
   `, { failsafe: true });
 

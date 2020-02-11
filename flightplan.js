@@ -171,11 +171,11 @@ plan.local(['db-replace'], (local) => {
     docker-compose exec web bash -c " \
       if \$(wp --url=${url} core is-installed --network --allow-root);
         then
-          wp search-replace --url='${url}${wpHome}' '${url}${wpHome}' '${process.env.DEVELOPMENT_URL}' --network --allow-root --skip-columns=guid  --skip-tables=wp_users,wp_blogs,wp_site
+          wp search-replace --url='${url}${wpHome}' '${url}${wpHome}' '${process.env.DEVELOPMENT_URL}' --network --allow-root --skip-tables=wp_users,wp_blogs,wp_site
           wp search-replace '${domain}' '${devDomain}' wp_blogs wp_site --allow-root --network
           wp search-replace '${wpHome}' '' wp_blogs --allow-root --network
         else
-          wp search-replace '${url}${wpHome}' '${process.env.DEVELOPMENT_URL}' --skip-columns=guid --skip-tables=wp_users --allow-root
+          wp search-replace '${url}${wpHome}' '${process.env.DEVELOPMENT_URL}' --skip-tables=wp_users --allow-root
       fi
     "
   `, { failsafe: true });

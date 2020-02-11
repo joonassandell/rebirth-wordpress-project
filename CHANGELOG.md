@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file. The format 
 - Tweaked instructions, updated deps
 - Don't ignore `web/wp-content/themes/*` by default to keep things simple
 - Run theme build automatically in start
+- Don't skip guid in database replaces
 
 ## [0.0.6] - 2019-08-10
 
