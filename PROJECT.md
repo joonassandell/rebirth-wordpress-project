@@ -86,13 +86,17 @@ Connect to MySQL (`db`) container.
 
 Pull uploaded files from production environment (`uploads/` folder etc.) to your local environment.
 
+#### `$ make db-backup`
+
+Creates dump to `database/local/wordpress-xxx.sql` from your local database.
+
 #### `$ make db-pull`
 
-Create and pull MySQL dump from the production environment to `database/remote` folder, backup current database to `database/local` folder and place the pulled dump ready for replacing in`/database/remote/wordpress.sql`. **Note that this could be very heavy process, so do it with care**.
+Create and pull MySQL dump from the production environment to `database/remote` folder and place the pulled dump ready for replacing in `/database/remote/wordpress.sql`. **Note that this could be very heavy process, so do it with care**.
 
 #### `$ make db-replace`
 
-Backups current database and replaces it with `database/remote/wordpress.sql` dump.
+Backups current database and replaces it with `database/remote/wordpress.sql` dump if there is one.
 
 #### `$ make db-replace-clone`
 
