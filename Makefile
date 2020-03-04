@@ -26,7 +26,7 @@ stop:
 	docker-compose stop
 
 update:
-	npm run --silent start
+	npm run --silent update
 
 rebuild:
 	docker-compose stop
@@ -57,7 +57,6 @@ db-reset:
 	npm run --silent db:reset
 
 db-pull:
-	npm run --silent db:backup
 	npm run --silent db:pull
 
 db-replace:

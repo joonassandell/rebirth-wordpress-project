@@ -14,6 +14,7 @@
     "db:reset": "fly db-replace:production-db --database=wordpress.sql",
     "db:replace": "fly db-replace:production-db",
     "start": "fly start:local",
+    "update": "fly update:local",
     "production:assets:push": "fly assets-push:production --flightplan flightplan.remote.js",
     "production:db:replace": "fly db-replace:production-db --flightplan flightplan.remote.js",
     "production:start": "fly start:production --flightplan flightplan.remote.js",

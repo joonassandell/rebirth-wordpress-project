@@ -21,7 +21,7 @@ let sshUser, sshPort, sshHost, webRoot, url, domain, wpHome, dbName, dbUser, dbP
 const date = `${new Date().getTime()}`;
 const devDomain = process.env.DEVELOPMENT_URL.replace(/(^\w+:|^)\/\//, '');
 
-plan.local(['start', 'assets-pull', 'db-pull', 'db-replace'], (local) => {
+plan.local(['start', 'update', 'assets-pull', 'db-pull', 'db-replace'], (local) => {
   sshHost = plan.runtime.hosts[0].host;
   sshUser = plan.runtime.hosts[0].username;
   sshPort = plan.runtime.hosts[0].port;
@@ -70,6 +70,18 @@ plan.local(['start'], (local) => {
   `);
 });
 
+plan.local(['update'], (local) => {
+  local.log('Updating dependencies...');
+  local.exec(`
+    docker-compose up -d
+
+    (cd web && composer update)
+
+    if [ -f web/wp-content/themes/{{theme-dir}}/composer.json ]; then
+      (cd web/wp-content/themes/{{theme-dir}} && composer update)
+    fi
+  `);
+});
 
 /* ======
  * Pull assets
@@ -125,7 +137,7 @@ plan.remote(['db-pull'], (remote) => {
 });
 
 plan.local(['db-pull'], (local) => {
-  local.log(`Pulling remote database dump to database/remote/${dbName}-${date}.sql`);
+  local.log(`Pulling remote database dump to database/remote/wordpress.sql`);
   local.exec(`mkdir -p database/remote`, { silent: true, failsafe: true });
   local.exec(`rsync -avz -e 'ssh -p ${sshPort}' \
     ${sshUser}@${sshHost}:${webRoot}/tmp/database/remote/${dbName}-${date}.sql ./database/remote`);
