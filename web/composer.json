@@ -55,6 +55,7 @@
     "wpackagist-plugin/simple-custom-post-order": "^2",
     "wpackagist-plugin/litespeed-cache": "^2",
     "wpackagist-plugin/wp-mail-smtp": "^1",
+    "wpackagist-plugin/breadcrumb-navxt": "^6",
     "advanced-custom-fields/advanced-custom-fields-pro": "*",
     "wpml/sitepress-multilingual-cms": "*"
   },
