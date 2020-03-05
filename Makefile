@@ -79,9 +79,6 @@ replace-special-characters:
 	  wp search-replace 'â€”' '—' --allow-root && \
 		wp search-replace 'Ã¶' 'ö' --allow-root"
 
-composer:
-	docker run --rm --volumes-from=rebirth-wordpress-example-dev-web --workdir=/var/www/html/ composer/composer:alpine $(c)
-
 bootstrap:
 	rm -rf README.md
 	rm -rf CHANGELOG.md
@@ -106,3 +103,7 @@ production-update:
 
 production-assets-push:
 	npm run --silent production:assets:push
+
+production-theme-deploy:
+	npm --prefix web/wp-content/themes/{{theme-dir}} run deploy
+
