@@ -9,7 +9,7 @@
   "scripts": {
     "assets:pull": "fly assets-pull:production",
     "db:backup": "fly db-backup:local",
-    "db:commit": "fly db-commit:production-db",
+    "db:commit": "fly db-commit:local",
     "db:pull": "fly db-pull:production-db",
     "db:reset": "fly db-replace:production-db --database=wordpress.sql",
     "db:replace": "fly db-replace:production-db",
