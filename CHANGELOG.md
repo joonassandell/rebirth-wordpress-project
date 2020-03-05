@@ -7,6 +7,9 @@ All notable changes to this project will be documented in this file. The format 
 - Add wp-mail-smtp as default plugin
 - Isolate composer update script (`$ make update`)
 - Fixes, better infos
+- Remove composer script
+- Add breadcrumb-navxt as default plugin
+- Add wrapper script for theme deployment
 
 ## [0.0.8] - 2020-02-11
 
