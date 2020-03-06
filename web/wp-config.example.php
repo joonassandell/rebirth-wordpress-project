@@ -24,6 +24,7 @@ switch (getenv('WORDPRESS_ENV')) {
 
         define('SAVEQUERIES', true);
         define('WP_DEBUG', true);
+        define('WP_DEBUG_LOG', true);
         define('FS_METHOD', 'direct');
 
         break;
