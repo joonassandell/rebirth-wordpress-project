@@ -62,6 +62,11 @@ define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
 
 /**
+ * Set default theme
+ */
+define('WP_DEFAULT_THEME', '{{theme-dir}}');
+
+/**
  * Authentication Unique Keys and Salts.
  *
  * Change these to different unique phrases!
