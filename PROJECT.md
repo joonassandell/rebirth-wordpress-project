@@ -151,6 +151,15 @@ Update WordPress Composer dependencies. Note that if you have private repositori
 
 Push your local assets to the production server.
 
+#### `$ make production-theme-deploy`
+
+Wrapper command for deploying theme.
+
+#### `$ make production-deploy`
+
+Deploy and update everything. Shorcut for `$ make production-update` & `$ make production-theme-deploy`.
+
+
 ---
 
 You may learn more about the project and issues in [Rebirth — WordPress Development Environment](https://github.com/joonasy/rebirth-wordpress-dev)

@@ -107,3 +107,6 @@ production-assets-push:
 production-theme-deploy:
 	npm --prefix web/wp-content/themes/{{theme-dir}} run deploy
 
+production-deploy:
+	make production-update
+	make production-theme-deploy
