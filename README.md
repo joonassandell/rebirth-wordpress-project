@@ -71,9 +71,9 @@ $ make start
 
 Crab a cup of :coffee: as the installation process may take a while. If you are not able to run these please refer to the [Makefile](Makefile) and run the commands manually.
 
-**5. Navigate to [127.0.0.1:8000](http://127.0.0.1:8000)**
+**5. Navigate to [127.0.0.1:8000/wp/wp-admin](http://127.0.0.1:8000/wp/wp-admin)**
 
-Login to WordPress, activate plugins and themes if not already activated. 
+Setup to WordPress, activate Advanced Custom Fields and theme if not already activated. 
 
 **6. Clean up & recommended actions**
 
@@ -112,12 +112,25 @@ Because the official image includes all the basics WordPress requires. Image cou
 
 ### How to setup a [multisite network](https://wordpress.org/support/article/before-you-create-a-network/)
 
-This guide assumes that the project contains a MySQL dump in `database/wordpress.sql`.
+How to setup a multisite with [path-based](https://wordpress.org/support/article/before-you-create-a-network/#path-based) install. This guide assumes that the project contains a MySQL dump in `database/wordpress.sql`.
 
 1. Read [Before You Create A Network](https://wordpress.org/support/article/before-you-create-a-network/)
-2. Add the following lines to `wp-config.php:~103` and make sure they're set correctly:
+2. Change all strings with `127.0.0.1:8000` to `127.0.0.1` and change `ports: 8000:80` to `ports: 80:80` in `docker-compose.yml`. E.g. make sure you [_don't_ have port in the dev url](https://wordpress.org/support/article/before-you-create-a-network/#restrictions)
+3. Restart docker. Note that your new site is now located in [127.0.0.1](http://127.0.0.1)
+4. Run `docker-compose exec web bash -c "wp search-replace '127.0.0.1:8000' '127.0.0.1' --allow-root --network"` to replace all the old strings in database
+5. Run `docker-compose exec web bash -c "wp search-replace '127.0.0.1/wp' '127.0.0.1' wp_options --allow-root --network"` so that the site root is set correctly
+6. Do steps [Allow Multisite](https://wordpress.org/support/article/create-a-network/#step-2-allow-multisite) and [Installing a Network](https://wordpress.org/support/article/create-a-network/#step-3-installing-a-network). Add the instructed line to `wp-config.php:~103`: 
 
+```php
+/**
+ * Setup multisite
+ */
+define('WP_ALLOW_MULTISITE', true);
 ```
+
+7. As instructed in step 6. make sure the following lines are in `wp-config.php:~103` & `wp-config.example.php:~103` with the correct domain:
+
+```php
 /**
  * Setup multisite
  */
@@ -130,7 +143,7 @@ define('SITE_ID_CURRENT_SITE', 1);
 define('BLOG_ID_CURRENT_SITE', 1);
 ```
 
-3. Replace the following in `.htaccess` & `.htaccess.example`:
+8. As instructed in step 6. make sure the following lines are in `.htaccess` & `.htaccess.example`:
 
 ```
 # ======
@@ -155,9 +168,11 @@ RewriteRule . index.php [L]
 </IfModule>
 # END WordPress
 ```
-4. Change all strings with `127.0.0.1:8000` to `127.0.0.1` and change `ports: 8000:80` to `ports: 80:80` in `docker-compose.yml`. E.g. make sure you [_don't_ have port in the dev url](https://wordpress.org/support/article/before-you-create-a-network/#restrictions).
 
-5. Update your database dump once you have created network and added sub blogs with `$ make db-commit`. Remember commit all your changes.
+9. Change `define('WP_SITEURL', getenv('DEVELOPMENT_URL') . '/wp');` -> `define('WP_SITEURL', getenv('DEVELOPMENT_URL'));` in in `wp-config.php` & `wp-config.example.php` to prevent confusion. 
+10. Activate plugins you had to deactivate in step 6. 
+11. At this time, in path-based installs you cannot remove the `/blog` slug without manual configuration to the network options in a non-obvious place. Make sure your permalinks are set as wanted with custom structure (e.g. `/articles/%postname%`) or you can [remove the `/blog`](https://isabelcastillo.com/remove-blog-slug-multisite) which is not recommended.
+12. Update your database dump once you have created network and added sub blogs with `$ make db-commit`. Remember to commit all your changes.
 
 
 ### In production my WordPress home is located in a subdir (e.g. https://{{production-url}}/myhome). How to make it work?
