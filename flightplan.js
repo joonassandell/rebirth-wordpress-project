@@ -75,6 +75,7 @@ plan.local(['update'], (local) => {
   local.exec(`
     docker-compose up -d
 
+    (cd web && composer clearcache)
     (cd web && composer update)
 
     if [ -f web/wp-content/themes/{{theme-dir}}/composer.json ]; then
