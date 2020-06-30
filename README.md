@@ -1,6 +1,6 @@
 # Rebirth — WordPress Development Environment
 
-This is a modern WordPress stack designed to work with [Rebirth](https://github.com/joonasy/rebirth) that helps you get started with the best development tools and project structure.
+This is a modern WordPress stack designed to work with [Rebirth](https://github.com/joonassandell/rebirth) that helps you get started with the best development tools and project structure.
 
 ## Features
 
@@ -23,25 +23,25 @@ This is a modern WordPress stack designed to work with [Rebirth](https://github.
 Quickly install with [create-project](https://github.com/mafintosh/create-project). Add your values to the following one-liner:
 
 ```
-$ npx create-project my-project-dir-dev joonasy/rebirth-wordpress-dev --human-name="My Project" --theme-dir=my-theme-dir --author=joonasy --production-url=my-project.com --wpml-user-id="=8365..." --wpml-key="=..." --acf-key="=..."
+$ npx create-project my-project-dir-dev joonassandell/rebirth-wordpress-dev --human-name="My Project" --theme-dir=my-theme-dir --author=joonassandell --production-url=my-project.com --wpml-user-id="=8365..." --wpml-key="=..." --acf-key="=..."
 ```
 
 After the installation is done jump to phase 3 in the next section.
 
 ## Getting started
 
-This development template assumes that you are using [Rebirth](https://github.com/joonasy/rebirth) to develop your theme. However it is not required and you may use any theme you like.
+This development template assumes that you are using [Rebirth](https://github.com/joonassandell/rebirth) to develop your theme. However it is not required and you may use any theme you like.
 
 **1. Clone this git repository and create your project folder**
 
-    $ git clone https://github.com/joonasy/rebirth-wordpress-dev.git my-project-dir-dev
+    $ git clone https://github.com/joonassandell/rebirth-wordpress-dev.git my-project-dir-dev
 
 **2. Replace all of the following variables in all the project files with _machine readable format_**
 
 - `{{name}}`: This is your project name (e.g. `my-project-dir-dev`; It's recommended to use same name as your project folders name which you created above. This should also be used for git urls).
 - `{{human-name}}`: This is your project human readable name (e.g. `My Project`).
 - `{{theme-dir}}`: This will be your theme directory which will be generated later (e.g. `my-theme-dir`)
-- `{{author}}`: Author of this project (e.g. `joonasy`)
+- `{{author}}`: Author of this project (e.g. `joonassandell`)
 - `{{production-url}}`: Website url of the project in which the app will be published (e.g. `project-name.com`, _Don't add protocol or trailing slashes_.)
 - `{{wpml-user-id}}` WPML user id. (e.g. `=8365`, _Note that you need to add the `=` sign in front here and in the following variables_)
 - `{{wpml-key}}` WPML subscription key (e.g. `=gxNTN8dHlwZ...`)
@@ -54,7 +54,7 @@ By default this template requires [WPML](http://wpml.org) and [ACF](https://www.
 If you don't want to use Rebirth you can skip this step and create your theme in some other way.
 
 1. Navigate to `web/wp-content/themes/`
-2. Create your theme with [Rebirth Yeoman Generator](https://github.com/joonasy/generator-rebirth)
+2. Create your theme with [Rebirth Yeoman Generator](https://github.com/joonassandell/generator-rebirth)
 
 ```
 $ npm install yo -g && npm install generator-rebirth -g
@@ -191,4 +191,4 @@ Try to add `export COMPOSE_INTERACTIVE_NO_CLI=1` to your shell and if it works y
 
 ## License
 
-Copyright (c) 2020 Joonas Ylitalo (Twitter: [@joonasy](https://twitter.com/joonasy)). Licensed under the MIT license.
+Copyright (c) 2020 Joonas Sandell (Twitter: [@joonassandell](https://twitter.com/joonassandell)). Licensed under the MIT license.
