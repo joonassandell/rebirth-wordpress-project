@@ -23,7 +23,7 @@ This is a modern WordPress stack designed to work with [Rebirth](https://github.
 Quickly install with [create-project](https://github.com/mafintosh/create-project). Add your values to the following one-liner:
 
 ```
-$ npx create-project my-project-dir-dev joonassandell/rebirth-wordpress-dev --human-name="My Project" --theme-dir=my-theme-dir --author=joonassandell --production-url=my-project.com --wpml-user-id="=8365..." --wpml-key="=..." --acf-key="=..."
+$ npx create-project my-project-dir joonassandell/rebirth-wordpress-project --human-name="My Project" --theme-dir=my-theme-dir --author=joonassandell --production-url=my-project.com --wpml-user-id="=8365..." --wpml-key="=..." --acf-key="=..."
 ```
 
 After the installation is done jump to phase 3 in the next section.
@@ -34,11 +34,11 @@ This development template assumes that you are using [Rebirth](https://github.co
 
 **1. Clone this git repository and create your project folder**
 
-    $ git clone https://github.com/joonassandell/rebirth-wordpress-dev.git my-project-dir-dev
+    $ git clone https://github.com/joonassandell/rebirth-wordpress-project.git my-project-dir
 
 **2. Replace all of the following variables in all the project files with _machine readable format_**
 
-- `{{name}}`: This is your project name (e.g. `my-project-dir-dev`; It's recommended to use same name as your project folders name which you created above. This should also be used for git urls).
+- `{{name}}`: This is your project name (e.g. `my-project-dir`; It's recommended to use same name as your project folders name which you created above. This should also be used for git urls).
 - `{{human-name}}`: This is your project human readable name (e.g. `My Project`).
 - `{{theme-dir}}`: This will be your theme directory which will be generated later (e.g. `my-theme-dir`)
 - `{{author}}`: Author of this project (e.g. `joonassandell`)
