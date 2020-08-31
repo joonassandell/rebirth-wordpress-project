@@ -1,6 +1,6 @@
 # {{human-name}}
 
-> Docker development environment for {{human-name}}. Started with [rebirth-wordpress-dev](https://github.com/joonasy/rebirth-wordpress-dev.git).
+> Docker development environment for {{human-name}}. Started with [rebirth-wordpress-dev](https://github.com/joonassandell/rebirth-wordpress-dev.git).
 
 # Requirements
 
@@ -162,4 +162,4 @@ Deploy and update everything. Shorcut for `$ make production-update` & `$ make p
 
 ---
 
-You may learn more about the project and issues in [Rebirth — WordPress Development Environment](https://github.com/joonasy/rebirth-wordpress-dev)
+You may learn more about the project and issues in [Rebirth — WordPress Development Environment](https://github.com/joonassandell/rebirth-wordpress-project)

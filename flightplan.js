@@ -105,7 +105,7 @@ plan.local(['assets-pull'], (local) => {
 plan.local(['db-backup'], (local) => {
   local.log(`Creating local dump to database/local/wordpress-${date}.sql`);
   local.exec(`mkdir -p database/local`, { silent: true, failsafe: true });
-  local.exec(`docker-compose exec db bash -c 'mysqldump -uroot -proot \
+  local.exec(`docker-compose exec -T db bash -c 'mysqldump -uroot -proot \
       wordpress > /docker-entrypoint-initdb.d/local/wordpress-${date}.sql'`, { failsafe: true });
 });
 
@@ -117,7 +117,7 @@ plan.local(['db-backup'], (local) => {
 plan.local(['db-commit'], (local) => {
   local.log('Dumping local database to database/wordpress.sql');
   local.exec(`mkdir -p database/local`, { silent: true, failsafe: true });
-  local.exec(`docker-compose exec db bash -c 'mysqldump -uroot -proot \
+  local.exec(`docker-compose exec -T db bash -c 'mysqldump -uroot -proot \
       wordpress > /docker-entrypoint-initdb.d/wordpress.sql'`, { failsafe: true });
 });
 
@@ -163,7 +163,7 @@ plan.local(['db-replace'], (local) => {
 
   local.exec(String.raw`
       if [ -f database/${database} ]; then
-        docker-compose exec db bash -c "mysql -uroot -proot \
+        docker-compose exec -T db bash -c "mysql -uroot -proot \
           -e 'drop database wordpress;'"
       fi
   `,
@@ -172,7 +172,7 @@ plan.local(['db-replace'], (local) => {
 
   local.exec(String.raw`
     if [ -f database/${database} ]; then
-      docker-compose exec db bash -c "mysql -uroot -proot \
+      docker-compose exec -T db bash -c "mysql -uroot -proot \
         -e ' \
           create database wordpress; \
           use wordpress; source docker-entrypoint-initdb.d/${database};'"
@@ -181,7 +181,7 @@ plan.local(['db-replace'], (local) => {
 
   local.log('Replacing strings in database...');
   local.exec(String.raw`
-    docker-compose exec web bash -c " \
+    docker-compose exec -T web bash -c " \
       if \$(wp --url=${url} core is-installed --network --allow-root); then
           wp search-replace --url='${url}${wpHome}' '${url}${wpHome}' '${process.env.DEVELOPMENT_URL}' --network --allow-root --skip-tables=wp_users,wp_blogs,wp_site
           wp search-replace '${domain}' '${devDomain}' wp_blogs wp_site --allow-root --network
