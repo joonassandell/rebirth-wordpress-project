@@ -71,6 +71,8 @@ Start docker and run:
 $ make start
 ```
 
+If you don't need ACF or WPML remove them from `web/composer.json` before taking action.
+
 Crab a cup of :coffee: as the installation process may take a while. If you are not able to run these please refer to the [Makefile](Makefile) and run the commands manually.
 
 **5. Navigate to [127.0.0.1:8000/wp/wp-admin](http://127.0.0.1:8000/wp/wp-admin)**
