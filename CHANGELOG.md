@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file. The format 
 
 - Update node version
 - Fix `the input device is not a TTY` probs with the `-T` flag
+- Updated repo url/readme
 
 ## [0.1.1] - 2020-05-28
 
