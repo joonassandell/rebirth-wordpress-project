@@ -22,10 +22,9 @@
   },
   "devDependencies": {
     "dotenv": "^8.1.0",
-    "flightplan": "^0.6.20",
-    "node-gyp": "^6.0.0"
+    "flightplan": "^0.6.20"
   },
   "engines": {
-    "node": ">=14.15.3"
+    "node": ">=12.19.0"
   }
 }
