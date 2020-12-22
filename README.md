@@ -17,6 +17,8 @@ This is a modern WordPress stack designed to work with [Rebirth](https://github.
 - [docker-compose](https://github.com/docker/compose)
 - [Node.js](http://nodejs.org/)
 - [Npm](https://www.npmjs.com)
+- [WPML](http://wpml.org) 
+- [ACF](https://www.advancedcustomfields.com)
 
 ## Quick start
 
